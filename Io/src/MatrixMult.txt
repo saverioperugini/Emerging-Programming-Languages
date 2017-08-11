@@ -1,0 +1,34 @@
+Mat := Object clone
+MatMult := Object clone
+
+Mat height := 2
+Mat width := 2
+Mat mat1 := list(list(1,1,1),list(2,2,2))
+Mat mat2 := list(list(1, 1, 1),list(2, 2, 2))
+Mat dList := list(list(1,2),list(1,2))
+Mat placeAtd := method(h, w, v, dList atPut(h, dList at(h) atPut(w, v)))
+
+
+MatMult getNum := method(alist, blist,
+   x := 0;
+   wait(1) 
+   for(i, 1, alist size,
+      x = x + ((alist at(i-1)) * (blist at(i-1)));
+      x println;
+    )
+)
+MatMult placeAt := method(h, w, 
+   v := getNum(Mat mat1 at(h), Mat mat2 at(w))
+   Mat placeAtd(h, w, v)
+)
+
+
+for(i, 1, Mat height,
+   for(b, 1, Mat width,
+      nMatMult := MatMult clone
+      nMatMult @placeAt(i-1, b-1);
+      "starting" println
+   )
+)
+while(Scheduler yieldingCoros size > 1, yield)
+Mat dList println

@@ -1,0 +1,306 @@
+<html>
+<head>
+<link rel="stylesheet" type="text/css" href="pl.css"/>
+<title>Introduction to the Elixir Programming Language</title>
+</head>
+
+<!--
+Author: Tyler M. Masthay
+
+CPS 499-03: Emerging Languages, Spring 2017
+-->
+
+<body>
+
+<table border="0" width="80%">
+<tr>
+<td>
+
+<h1 align="center">Introduction to the Elixir Programming Language</h1>
+
+<hr align="center" width="80%" size="10"/>
+
+<b>Author</b>: Tyler M. Masthay
+<br/>
+<br/>
+<b>CPS 499-03: Emerging Languages, Spring 2017</b>
+
+<h2><hr align="left" width="40%"/>Key language concepts in Elixir
+<hr align="left" width="40%"/></h2>
+<ul>
+
+<li> Functional language designed primarily for concurrent, distributed computing </li>
+<li> Elixir is similar to Ruby and Erlang, especially Erlang </li>
+<li> Every Elixir program compiles into bytecode for the Erlang Virtual Machine </li>
+<li> Polymorphism via protocols (main technical inspiration behind Elixir) </li>
+<li> Use of Actor model for concurrency </li>
+<li> Like Erlang, designed for creating fault-tolerant systems </li>
+<li> Developed by Jos&eacute Valim, whose main goal was to improve upon Erlang </li>
+<li> Standardized project-making, configuration, and documentation tools for fast development
+<li> Everything is immutable </li>
+<li> Everything is pattern matched </li>
+<li> Supports closures (modules) </li>
+<li> Types are inferrred </li> 
+</ul>
+
+
+
+</ul>
+
+<h2><hr align="left" width="40%"/>
+Essential Elixir
+<hr align="left" width="40%"/></h2>
+<ul>
+<li> Function types can be user-defined by <tt>@spec</tt> keyword </li>
+<li> send and receive 
+<ul>
+	<li> Used for processes to communicate back and forth </li>
+	<li> <tt> send( recipient, message ) </tt> </li>
+	<ul>
+		<li> recipient: process receiving message </li>
+		<li> message: the message being passed </li>
+	</ul>
+	<li> receive 
+	<ul>
+		<li> Syntax similar to a switch statement </li>
+		<li> <tt> receive do msg1 -> response1; msg2 -> response2; ... end </tt> </li> 
+	</ul> 
+</ul>
+</li>
+<li> Primitive types: integer, float, boolean, atom, string, list, tuple </li>
+<li> Polymorphic, LISP-like lists but with Haskell-like syntax </li>
+<li> List operators <tt> ++ </tt> (append), <tt> -- </tt> (difference), <tt> | </tt> (cons) </li>
+<li> Lambda expressions through <tt> fn(x) -> (expr) </tt>  </li>
+<li> <tt>def</tt> prefixes many declarations (<tt> def </tt> --- function declaration, <tt> defmodule </tt> --- module declaration, <tt> defprotocol </tt> --- protocol declaration ) </li>
+<li> <tt> mix </tt> command for automatic project generation and configuration </li>
+<li> <tt> |> </tt> to create pipes in Elixir command line (equivalent to <tt> | </tt> in Linux) </li>
+
+</ul>
+
+<h2><hr align="left" width="40%"/>
+Essential types
+<hr align="left" width="40%"/></h2>
+<li> string concatenation: <tt> <> </tt>(e.g., <tt>"Hello" <> " world!"</tt>) </li>
+<li> basic arithmetic: <tt> + </tt>,<tt>-</tt>,<tt>*</tt>,<tt>/</tt>, <tt>-</tt> for unary negation </li>
+<li> comparison operators: <tt>==</tt>, <tt>===</tt> (type and value matching), <tt><</tt>, <tt>></tt>, <tt><=</tt>, <tt>=</tt> </li>
+<li> boolean operators: <tt>and</tt>, <tt>or</tt>, <tt>not</tt>, <tt>or</tt>, <tt>&&</tt>, <tt>||</tt>, <tt>!</tt> </li>
+<li> <tt>if</tt>, <tt>case</tt>, <tt>cond</tt>, <tt>unless</tt> -- <tt>case</tt> is a switch statement, <tt>cond</tt> is just like LISP <tt>cond</tt>, <tt>unless</tt> is <tt>if</tt> statement with negation of predicate </li> 
+<li> comments begin with <tt>#</tt> and multiline comments are not supported </li>
+
+<h2><hr align="left" width="40%"/>
+Running a progam
+<hr align="left" width="40%"/></h2>
+<li> <tt> iex myProgram.ex </tt> </li>
+<li> Configurating a project 
+<pre> 
+mix new projectName --sup
+cd projectName 
+mix test 
+ </pre>
+</li>
+<li> hit CTRL+C followed by 'a' (for "abort") to exit the interpreter </li>
+
+<h2><hr align="left" width="40%"/>
+Functions
+<hr align="left" width="40%"/></h2>
+<li> Can be declared like in Haskell or with <tt>def</tt> inside module </li>
+<ul>
+<li>
+<pre>
+identity = fn(x) -> x end
+</pre> 
+</li>
+<li>
+<pre>
+defmodule simpleModule
+	def identity = fn(x) -> x end
+end
+</pre>
+</li>
+</ul>
+
+<li> Can be passed anonymously </li>
+<ul>
+<li>
+<pre>
+apply = fn(f,x) -> f.(x) end
+apply.((fn(x)->2*x end), 5)
+</pre>
+</li>
+</ul>
+<li> Curry and uncurry are not built-in functions like in Haskell</li>
+<li> Functions are not default curried like Haskell </li>
+<li> Defining a curried function 
+<ul>
+<pre>add = fn(x) -> fn(y) -> x + y end end  
+add2 = add.(2)
+add2.(3)
+</pre>
+</ul>
+</li>
+<h2><hr align="left" width="40%"/>
+The Actor Model of Concurrency
+<hr align="left" width="40%"/></h2>
+<ul>
+<li>Two basic principles</li>
+<ul>
+<li>everything is an actor</li>
+<li>an actor has a mailbox</li>
+</ul>
+<li>How do those two principles give you recursion?</li>
+<li> Turing complete </li>
+<ol>
+ 1. Processing <br/>
+ 2. Storage  <br/>
+ 3. Communication 
+</ol>
+<li> Basic actions of Actors </li>
+<ol>
+1. Create more actors (<tt>spawn</tt>) <br/>
+2. Send messages to other actors (<tt>send( receivingActor, message )</tt>) <br/>
+3. Decide what to do with its next message (<tt>receive do ... end</tt>)
+</ul>
+<ul>
+</ul>
+</ul>
+
+<h2><hr align="left" width="40%"/>
+Actors in Elixir
+<hr align="left" width="40%"/></h2>
+
+<ul>
+<li>Actors are decoupled</li>
+<ul>
+<li> they run at their own speed </li>
+<li> they do not block when they send messages </li>
+</ul>
+<li> Message mailbox in FIFO order, but message passing is <i> asynchronous </i> <pre>
+defmodule Counter do
+   def loop(count) do
+      receive do
+         {:next} ->
+            IO.puts("Current count: #{count}")
+            loop(count + 1)
+      end
+   end
+end
+
+counter1 = spawn(Counter, :loop, [1])
+counter2 = spawn(Counter, :loop, [100])
+
+send(counter1, {:next})
+send(counter1, {:next})
+send(counter2, {:next})
+send(counter2, {:next})
+send(counter1, {:next})
+send(counter2, {:next})
+send(counter1, {:next})
+
+$ iex Counter.ex
+
+Current count: 1
+Current count: 100
+Current count: 2
+Current count: 101
+Current count: 3
+Current count: 102
+Current count: 4
+</pre> </li>
+</ul>
+
+<h2><hr align="left" width="40%"/>
+Exercises
+<hr align="left" width="40%"/></h2>
+
+
+The following are programming exercises that incorporate essential
+Elixir concepts:
+
+<ul>
+
+<li>
+Modify the program <tt>Counter2.ex</tt>
+so that a private member variable <tt>currCount</tt>
+is printed and modified.
+<br/>
+<br/>
+</li>
+
+<li>Implement a module for a binary tree closure that is purely functional.
+Use the following representation: a leaf node is a tuple of the form
+<tt>{:leaf, val}</tt> where <tt>val</tt> is the value associated with this
+tree and an internal node is of the form <tt>{:internal, left, right}</tt>
+where <tt>left</tt> and <tt>right</tt> are the associated subtrees.  Ensure
+that polymorphics trees are supported. For example, the tree <tt> {:internal,
+{:leaf, 1}, {:leaf, fn(x) -> x}} </tt> should be supported within the module.
+<br/>
+<br/>
+</li>
+
+<li> Use the binary tree from problem 2 to implement the <tt>foldl</tt> and
+<tt>foldr</tt> functions from the Haskell programming language.</li>
+
+</ul>
+
+<h2><hr align="left" width="40%"/>References</h2>
+
+<ul>
+<table>
+
+<tr>
+<td valign="top">[1]</td>
+<td>
+2017. Elixir. 
+Available: http://elixir-lang.org [Last accessed: 29 March 2017]. 
+(2017). </td>
+</tr>
+
+<tr>
+<td valign="top">[2]</td>
+<td>
+I. Dees B. Tate, F. Daoud, and J. Moffitt. 2014. <i> Seven 
+More Languages in Seven Weeks: Languages That Are Shaping the Future</i>. 
+The Pragmatic Bookshelf, Raleigh, NC.
+</td>
+</tr>
+
+<tr>
+<td valign="top">[3]</td>
+<td>
+P. Butcher. 2014. <i> Seven Concurrency Models in Seven Weeks: When Threads Unravel </i>.
+The Pragmatic Bookshelf, Raleigh, NC.
+</td>
+</tr>
+
+<tr>
+<td valign="top">[4]</td>
+<td>Sahu, N. "An Interview with Elixir Creator José Valim." <i> SitePoint </i>. SitePoint, 30 Nov. 2015. Web. 18 Mar. 2017.
+</tr>
+
+<tr>
+<td valign="top">[5]</td>
+<td>
+C. Hewitt, P. Bishop, and R. Steiger. 1973. Session 8 Formalisms 
+for Artificial Intelligence: A Universal Modular ACTOR Formalism
+for Artificial Intelligence. In <i> Advance Papers of the Conference </i>, Vol. 3.
+Stanford Research Institute, 235.
+
+<tr>
+<td valign="top">[6]</td>
+<td>
+S.L. Salas and E. Hille. 2016. <i> Erlang and Elixir for Imperative Programmers </i>.
+APPRESS, New York, N.Y.
+</td>
+</tr>
+
+</table>
+</ul>
+
+<hr align="center" width="80%" size="10"/>
+<a href="index.html"><img src="http://academic.udayton.edu/SaverioPerugini/images/rh.jpg" alt="Return Home" border="0"/></a>
+</td>
+</tr>
+</table>
+
+</body>
+</html>
