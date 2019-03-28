@@ -23,8 +23,7 @@ Languages presented Lua, Elm, Elixir, Julia, CLIPS, PROLOG, Io, Factor
 For more information, visit
 http://perugini.cps.udayton.edu/teaching/courses/Spring2017/cps499/languages.html.
 
-### Videos of student presentations of these languages are available on
-YouTube:
+### Videos of student presentations of these languages are available on YouTube:
 
 | Language | YouTube Hyperlink                                      |
 | ---------|--------------------------------------------------------|
@@ -58,8 +57,6 @@ YouTube:
 | PROLOG   | http://perugini.cps.udayton.edu/teaching/courses/Spring2017/cps499/Languages/notes/PROLOG.html     |
 | Factor   | http://perugini.cps.udayton.edu/teaching/courses/Spring2017/cps499/Languages/notes/Factor.html       |
 | Io       | http://perugini.cps.udayton.edu/teaching/courses/Spring2017/cps499/Languages/notes/Io.html       |
-
-+==============================================================================+
 
 ## For more information, contact:
 
