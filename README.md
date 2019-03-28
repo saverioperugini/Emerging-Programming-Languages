@@ -1,4 +1,4 @@
-# Student Papers (in PDF) and Notes (in HTML)
+# Student Papers, Notes, and Videos
 
 ## on
 
@@ -18,7 +18,7 @@
 ## 300 College Park
 ## Dayton, Ohio 45469
 
-# Languages presented: Lua, Elm, Elixir, Julia, CLIPS, PROLOG, Io, Factor
+# Languages presented: Lua, Elm, Elixir, Julia, CLIPS, PROLOG, Io, and Factor
 
 For more information, visit
 http://perugini.cps.udayton.edu/teaching/courses/Spring2017/cps499/languages.html.
