@@ -60,13 +60,13 @@ http://perugini.cps.udayton.edu/teaching/courses/Spring2017/cps499/languages.htm
 
 ## For more information, contact:
 
-Saverio Perugini, Ph.D.
-Associate Professor
-Department of Computer Science
-University of Dayton
-300 College Park
-Dayton, Ohio  45469-2160
-Tel: +1 (937) 229-4079
-Fax: +1 (937) 229-2193
-E-mail: saverio@udayton.edu
+Saverio Perugini, Ph.D.  
+Associate Professor  
+Department of Computer Science  
+University of Dayton  
+300 College Park  
+Dayton, Ohio  45469-2160  
+Tel: +1 (937) 229-4079  
+Fax: +1 (937) 229-2193  
+E-mail: saverio@udayton.edu  
 WWW: http://academic.udayton.edu/SaverioPerugini/
