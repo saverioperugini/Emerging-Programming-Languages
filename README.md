@@ -72,5 +72,5 @@ University of Dayton
 Dayton, Ohio  45469-2160  
 Tel: +1 (937) 229-4079  
 Fax: +1 (937) 229-2193  
-E-mail: saverio@udayton.edu  
-WWW: [http://academic.udayton.edu/SaverioPerugini/](#http://academic.udayton.edu/SaverioPerugini/)
+E-mail: [saverio@udayton.edu](saverio@udayton.edu)
+WWW: [http://academic.udayton.edu/SaverioPerugini/](http://academic.udayton.edu/SaverioPerugini/)
