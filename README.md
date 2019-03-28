@@ -36,6 +36,8 @@ http://perugini.cps.udayton.edu/teaching/courses/Spring2017/cps499/languages.htm
 | Factor   | https://www.youtube.com/watch?v=FjW4-5tGidk&t=7s       |
 | Io       | https://www.youtube.com/watch?v=x2KtYbNzhSg&t=1s       |
 
+### Short papers on these languages are available:
+
 | Language | Paper Hyperlink                                      |
 | ---------|--------------------------------------------------------|
 | Lua      | http://perugini.cps.udayton.edu/teaching/courses/Spring2017/cps499/Languages/papers/Lua.pdf       |
@@ -46,6 +48,8 @@ http://perugini.cps.udayton.edu/teaching/courses/Spring2017/cps499/languages.htm
 | PROLOG   | http://perugini.cps.udayton.edu/teaching/courses/Spring2017/cps499/Languages/papers/PROLOG.pdf      |
 | Factor   | http://perugini.cps.udayton.edu/teaching/courses/Spring2017/cps499/Languages/papers/Factor.pdf       |
 | Io       | unavailable       |
+
+### HTML notes papers on these languages are available:
 
 | Language | Notes Hyperlink                                      |
 | ---------|--------------------------------------------------------|
