@@ -1,7 +1,6 @@
 # Factor Examples
 
-These vocabulary examples are supplemental to ["An Introduction to Factor"]
-(https://github.com/saverioperugini/Emerging-Languages-Spring-2017/blob/master/Factor/Factor.pdf).
+These vocabulary examples are supplemental to ["An Introduction to Factor"](../Factor.pdf).
 
 ## Vocabulary Usage
 
