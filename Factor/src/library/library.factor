@@ -3,7 +3,7 @@
 ! This file is supplemental to "An Introduction to Factor".
 ! See https://github.com/saverioperugini/Emerging-Languages-Spring-2017/blob/master/Factor/Factor.pdf
 USING: accessors combinators io kernel math math.parser sequences strings ;
-IN: exercises
+IN: library
 
 TUPLE: novel title author genre publisher year ID ;
 TUPLE: textbook title author subject publisher year ID ;
