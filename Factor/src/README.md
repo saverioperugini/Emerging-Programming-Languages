@@ -1,7 +1,6 @@
 # Factor Examples
 
-These vocabulary examples are supplemental to ["An Introduction to Factor"]
-(https://github.com/saverioperugini/Emerging-Languages-Spring-2017/blob/master/Factor/Factor.pdf).
+These vocabulary examples are supplemental to ["An Introduction to Factor"](../Factor.pdf).
 
 ## Vocabulary Usage
 
@@ -15,12 +14,17 @@ The `caesar` example demonstrates usage of private helper words.
 
 To test the `caesar` vocabulary start a new Factor Listener session and submit 
 `USE: caesar` to the listener. If successful the listener will continue with no 
-additional prompt. If an error occurs check to make sure that the `caesar` 
+errors. If an error occurs check to make sure that the `caesar` 
 vocabulary folder is within your working path.
 
 Once accessed, the `caesar` word may be used by supplying the proper arguments 
 to it upon the stack. For example, submitting `"abcdef" 6 caesar` should result in 
 `"ghijkl"` on the stack.
+
+```factor
+USE: caesar
+"abcdef" 6 caesar
+```
 
 ## Example 2 - Class Constructors & Words
 
@@ -28,18 +32,22 @@ The `novel` example demonstrates a simple class constructor and a method that
 operates on the class.
 
 To test the `novel` vocabulary start a new Factor Listener session and submit 
-`USE: novel` to the listener. If successful the listener will continue with no 
-additional prompt. If an error occurs check to make sure that the `novel` 
-vocabulary folder is within your working path.
-
-Once accessed, the `novel` constructor word may be used by supplying the proper 
-arguments to it upon the stack. The `<novel>` word expects strings representing a 
-title, author, genre, publisher, and integers representing a year of publication as 
-well as an identification number, as in the following example: `"The Lion, the Witch, and the Wardrobe" "C. S. Lewis" "Fantasy" "Geoffrey Bles" 
+`USE: novel` to the listener. Once accessed, the `novel` constructor word may be used by 
+supplying the proper arguments to it upon the stack. The `<novel>` word expects strings 
+representing a title, author, genre, publisher, and integers representing a year of 
+publication as well as an identification number, as in the following example: 
+`"The Lion, the Witch, and the Wardrobe" "C. S. Lewis" "Fantasy" "Geoffrey Bles" 
 1952 1 <novel>`.
 
 When executed the `<novel>` constructor will leave a `novel` on the stack. To print
 the details to the listener terminal use the `book-print` word.
+
+```factor
+USE: novel
+"The Lion, the Witch, and the Wardrobe" "C. S. Lewis" "Fantasy" "Geoffrey Bles" 1952 1 <novel>
+book-print
+```
+
 
 ## Example 3 - Mixin Classes & Generic Words
 
@@ -47,13 +55,23 @@ The `library` example showcases the `mixin` feature to implement class unions, a
 the way to define class-specific implementations of functions.
 
 To test the `library` vocabulary start a new Factor Listener session and submit 
-`USE: library` to the listener. If successful the listener will continue with no 
-additional prompt. If an error occurs check to make sure that the `library` 
-vocabulary folder is within your working path.
-
-Once accessed, the `library` provides definitions for the `novel`, `article`, and
-`textbook` classes. These classes have similar arguments to the `novel` mentioned above.
-Specifically, the `article` changes the genre field to discipline and adds journal and volume
-fields. The `textbook` field changes the genre field to a subject.
+`USE: library` to the listener. Once accessed, the `library` provides definitions for the 
+`novel`, `article`, and `textbook` classes. These classes have similar arguments to the `novel`
+mentioned above. Specifically, the `article` changes the genre field to discipline and adds 
+journal and volume fields. The `textbook` field changes the genre field to a subject.
 
 When executed the `book-print` word will operate on any instance of a `library` object.
+
+```factor
+USE: library
+
+"The Lion, the Witch, and the Wardrobe" "C. S. Lewis" "Fantasy" "Geoffrey Bles" 1952 1 <novel>
+book-print
+
+"The C Programming Langauge" "Ritchie, D. and Kernighan, B." "Computer Science" "Prentice Hall" 1988 2 <textbook>
+book-print
+
+"Factor: A Dynamic Stack-based Programming Langauge" "Pestov, S." "Computer Science" "ACM SIGPLAN Notices" 45 "ACM Press" 2010 3 <article>
+book-print
+
+```
