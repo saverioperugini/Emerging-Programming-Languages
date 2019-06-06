@@ -21,6 +21,11 @@ Once accessed, the `caesar` word may be used by supplying the proper arguments
 to it upon the stack. For example, submitting `"abcdef" 6 caesar` should result in 
 `"ghijkl"` on the stack.
 
+```factor
+USE: caesar
+"abcdef" 6 caesar
+```
+
 ## Example 2 - Class Constructors & Words
 
 The `novel` example demonstrates a simple class constructor and a method that
@@ -37,6 +42,13 @@ publication as well as an identification number, as in the following example:
 When executed the `<novel>` constructor will leave a `novel` on the stack. To print
 the details to the listener terminal use the `book-print` word.
 
+```factor
+USE: novel
+"The Lion, the Witch, and the Wardrobe" "C. S. Lewis" "Fantasy" "Geoffrey Bles" 1952 1 <novel>
+book-print
+```
+
+
 ## Example 3 - Mixin Classes & Generic Words
 
 The `library` example showcases the `mixin` feature to implement class unions, as well as
@@ -49,3 +61,17 @@ mentioned above. Specifically, the `article` changes the genre field to discipli
 journal and volume fields. The `textbook` field changes the genre field to a subject.
 
 When executed the `book-print` word will operate on any instance of a `library` object.
+
+```factor
+USE: library
+
+"The Lion, the Witch, and the Wardrobe" "C. S. Lewis" "Fantasy" "Geoffrey Bles" 1952 1 <novel>
+book-print
+
+"The C Programming Langauge" "Ritchie, D. and Kernighan, B." "Computer Science" "Prentice Hall" 1988 2 <textbook>
+book-print
+
+"Factor: A Dynamic Stack-based Programming Langauge" "Pestov, S." "Computer Science" "ACM SIGPLAN Notices" 45 "ACM Press" 2010 3 <article>
+book-print
+
+```
