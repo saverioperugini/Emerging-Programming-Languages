@@ -9,7 +9,7 @@
         GitHub
       </a>
       </card>
-      
+
       <card
         title="Responsive"
         icon="cellphone-link"
@@ -18,7 +18,7 @@
           Every
         </b> component is responsive
       </card>
-      
+
       <card
         title="Modern"
         icon="alert-decagram"
@@ -29,7 +29,7 @@
         Bulma
       </a>
       </card>
-      
+
       <card
         title="Lightweight"
         icon="arrange-bring-to-front"
@@ -42,18 +42,15 @@
 
 <script>
 	import Card from "~/components/Card"
-  import recursive from "recursive-readdir";
-	
+
 	export default {
 		name: "HomePage",
-		
+
 		components: {
 			Card
 		},
 		created() {
-			recursive("~/student-languages", function (err, files) {
-		  console.log(files)
-	  })
+
 		},
 		data: () => ({
 			languages: []

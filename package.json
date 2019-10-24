@@ -11,10 +11,8 @@
     "generate": "nuxt generate"
   },
   "dependencies": {
-    "fs": "0.0.1-security",
     "nuxt": "^2.0.0",
-    "nuxt-buefy": "^0.3.2",
-    "recursive-readdir": "^2.2.2"
+    "nuxt-buefy": "^0.3.2"
   },
   "devDependencies": {}
 }
