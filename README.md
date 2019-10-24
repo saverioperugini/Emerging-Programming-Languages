@@ -1,76 +1,22 @@
-# Student Papers, Notes, and Videos
+# CPS452Site
 
-## on
+> Emerging Programming Languages
 
-# (Emerging) Programming Languages
+## Build Setup
 
-## from the 
+``` bash
+# install dependencies
+$ npm run install
 
-# Spring 2017 offering of
+# serve with hot reload at localhost:3000
+$ npm run dev
 
-# CPS 499: Special Topic in Emerging Languages
+# build for production and launch server
+$ npm run build
+$ npm run start
 
-## at
+# generate static project
+$ npm run generate
+```
 
-# University of Dayton
-
-## Department of Computer Science
-## 300 College Park
-## Dayton, Ohio 45469
-
-# Languages presented: Lua, Elm, Elixir, Julia, CLIPS, PROLOG, Io, and Factor
-
-For more information, visit
-[http://perugini.cps.udayton.edu/teaching/courses/Spring2017/cps499/languages.html](http://perugini.cps.udayton.edu/teaching/courses/Spring2017/cps499/languages.html).
-
-### Videos of student presentations of these languages are available on YouTube:
-
-| Language | YouTube Hyperlink                                      |
-| ---------|--------------------------------------------------------|
-| Lua      | [https://www.youtube.com/watch?v=eOtMCUV3vL0&t=7s](https://www.youtube.com/watch?v=eOtMCUV3vL0&t=7s)       |
-| Elm      | [https://www.youtube.com/watch?v=XxFOFKXM-5s&t=14s](https://www.youtube.com/watch?v=XxFOFKXM-5s&t=14s)      |
-| Julia    | [https://www.youtube.com/watch?v=ZPvwzmJF4Jc&t=15s](https://www.youtube.com/watch?v=ZPvwzmJF4Jc&t=15s)      |
-| Elixir   | Video not recorded due to unavailability of equipment. |
-| CLIPS    | [https://www.youtube.com/watch?v=XX8Fxze6Np8&t=127s](https://www.youtube.com/watch?v=XX8Fxze6Np8&t=127s)     |
-| PROLOG   | [https://www.youtube.com/watch?v=n0WfrbltxdU&t=22s](https://www.youtube.com/watch?v=n0WfrbltxdU&t=22s)      |
-| Factor   | [https://www.youtube.com/watch?v=FjW4-5tGidk&t=7s](https://www.youtube.com/watch?v=FjW4-5tGidk&t=7s)       |
-| Io       | [https://www.youtube.com/watch?v=x2KtYbNzhSg&t=1s](https://www.youtube.com/watch?v=x2KtYbNzhSg&t=1s)       |
-
-### Short papers on these languages are available:
-
-| Language | Paper Hyperlink                                      |
-| ---------|--------------------------------------------------------|
-| Lua      | [http://perugini.cps.udayton.edu/teaching/courses/Spring2017/cps499/Languages/papers/Lua.pdf](http://perugini.cps.udayton.edu/teaching/courses/Spring2017/cps499/Languages/papers/Lua.pdf)       |
-| Elm      | unavailable      |
-| Julia    | unavailable      |
-| Elixir   | [http://perugini.cps.udayton.edu/teaching/courses/Spring2017/cps499/Languages/papers/Elixir.pdf](http://perugini.cps.udayton.edu/teaching/courses/Spring2017/cps499/Languages/papers/Elixir.pdf) |
-| CLIPS    | [http://perugini.cps.udayton.edu/teaching/courses/Spring2017/cps499/Languages/papers/CLIPS.pdf](http://perugini.cps.udayton.edu/teaching/courses/Spring2017/cps499/Languages/papers/CLIPS.pdf)     |
-| PROLOG   | [http://perugini.cps.udayton.edu/teaching/courses/Spring2017/cps499/Languages/papers/PROLOG.pdf](http://perugini.cps.udayton.edu/teaching/courses/Spring2017/cps499/Languages/papers/PROLOG.pdf)      |
-| Factor   | [http://perugini.cps.udayton.edu/teaching/courses/Spring2017/cps499/Languages/papers/Factor.pdf](http://perugini.cps.udayton.edu/teaching/courses/Spring2017/cps499/Languages/papers/Factor.pdf)       |
-| Io       | unavailable       |
-
-### HTML notes papers on these languages are available:
-
-| Language | Notes Hyperlink                                      |
-| ---------|--------------------------------------------------------|
-| Lua      | [http://perugini.cps.udayton.edu/teaching/courses/Spring2017/cps499/Languages/notes/Lua.html](http://perugini.cps.udayton.edu/teaching/courses/Spring2017/cps499/Languages/notes/Lua.html)       |
-| Elm      | unavailable      |
-| Julia    | [http://perugini.cps.udayton.edu/teaching/courses/Spring2017/cps499/Languages/notes/Julia.html](http://perugini.cps.udayton.edu/teaching/courses/Spring2017/cps499/Languages/notes/Julia.html)      |
-| Elixir   | [http://perugini.cps.udayton.edu/teaching/courses/Spring2017/cps499/Languages/notes/Elixir.html](http://perugini.cps.udayton.edu/teaching/courses/Spring2017/cps499/Languages/notes/Elixir.html) |
-| CLIPS    | [http://perugini.cps.udayton.edu/teaching/courses/Spring2017/cps499/Languages/notes/CLIPS.html](http://perugini.cps.udayton.edu/teaching/courses/Spring2017/cps499/Languages/notes/CLIPS.html)     |
-| PROLOG   | [http://perugini.cps.udayton.edu/teaching/courses/Spring2017/cps499/Languages/notes/PROLOG.html](http://perugini.cps.udayton.edu/teaching/courses/Spring2017/cps499/Languages/notes/PROLOG.html)     |
-| Factor   | [http://perugini.cps.udayton.edu/teaching/courses/Spring2017/cps499/Languages/notes/Factor.html](http://perugini.cps.udayton.edu/teaching/courses/Spring2017/cps499/Languages/notes/Factor.html)       |
-| Io       | [http://perugini.cps.udayton.edu/teaching/courses/Spring2017/cps499/Languages/notes/Io.html](http://perugini.cps.udayton.edu/teaching/courses/Spring2017/cps499/Languages/notes/Io.html)       |
-
-## For more information, contact:
-
-Saverio Perugini, Ph.D.  
-Associate Professor  
-Department of Computer Science  
-University of Dayton  
-300 College Park  
-Dayton, Ohio  45469-2160  
-Tel: +1 (937) 229-4079  
-Fax: +1 (937) 229-2193  
-E-mail: [saverio@udayton.edu](saverio@udayton.edu)  
-WWW: [http://academic.udayton.edu/SaverioPerugini/](http://academic.udayton.edu/SaverioPerugini/)
+For detailed explanation on how things work, check out [Nuxt.js docs](https://nuxtjs.org).

@@ -1,0 +1,20 @@
+{
+  "name": "CPS452Site",
+  "version": "1.0.0",
+  "description": "Emerging Programming Languages",
+  "author": "Ajay Patnaik &amp; Jacob Schwartz",
+  "private": true,
+  "scripts": {
+    "dev": "nuxt",
+    "build": "nuxt build",
+    "start": "nuxt start",
+    "generate": "nuxt generate"
+  },
+  "dependencies": {
+    "fs": "0.0.1-security",
+    "nuxt": "^2.0.0",
+    "nuxt-buefy": "^0.3.2",
+    "recursive-readdir": "^2.2.2"
+  },
+  "devDependencies": {}
+}
