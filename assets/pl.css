@@ -1,0 +1,35 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto+Mono|Roboto:400,700&display=swap');
+
+* {
+	font-family: 'Roboto', sans-serif;
+}
+
+header {
+	margin: 0 15vw;
+	text-align: center;
+}
+
+header hr {
+	margin-bottom: 24px;
+}
+
+article {
+	margin: 0 18vw;
+}
+
+code {
+	background-color: #EEEEEE;
+	font-family: 'Roboto Mono', monospace;
+}
+
+code :not(table) {
+	border: solid 1px #DCDCDC;
+	padding: 0 2px;
+}
+
+.code-block {
+	display: block;
+	margin-left: 6px;
+	width: fit-content;
+}
+
