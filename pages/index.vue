@@ -1,41 +1,49 @@
 <template>
 	<section class="section">
 		<div class="columns is-mobile">
-			<card
-					title="Free"
-					icon="github-circle"
-			>
-				Open source on <a href="https://github.com/buefy/buefy">
-				GitHub
-			</a>
-			</card>
-			
-			<card
-					title="Responsive"
-					icon="cellphone-link"
-			>
-				<b class="has-text-grey">
-					Every
-				</b> component is responsive
-			</card>
-			
-			<card
-					title="Modern"
-					icon="alert-decagram"
-			>
-				Built with <a href="https://vuejs.org/">
-				Vue.js
-			</a> and <a href="http://bulma.io/">
-				Bulma
-			</a>
-			</card>
-			
-			<card
-					title="Lightweight"
-					icon="arrange-bring-to-front"
-			>
-				No other internal dependency
-			</card>
+			<div class="column is-one-quarter">
+				<card title="CLIPS" icon="github-circle">
+					<button class="button is-link">View Presentation</button>
+				</card>
+			</div>
+
+			<div class="column is-one-quarter">
+				<card title="Elixir" icon="github-circle">
+				<button class="button is-link">View Presentation</button>
+				</card>
+			</div>
+
+			<div class="column is-one-quarter">
+				<card title="Factor" icon="github-circle">
+					<button class="button is-link">View Presentation</button>
+				</card>
+			</div>
+
+			<div class="column is-one-quarter">
+				<card title="IO" icon="github-circle">
+					<button class="button is-link">View Presentation</button>
+				</card>
+			</div>
+		</div>
+		
+		<div class="columns is-mobile">
+			<div class="column is-one-quarter">
+				<card title="Julia" icon="github-circle">
+					<button class="button is-link">View Presentation</button>
+				</card>
+			</div>
+
+			<div class="column is-one-quarter">
+				<card title="Lua" icon="github-circle">
+					<button class="button is-link">View Presentation</button>
+				</card>
+			</div>
+
+			<div class="column is-one-quarter">
+				<card title="PROLOG" icon="github-circle">
+					<button class="button is-link">View Presentation</button>
+				</card>
+			</div>
 		</div>
 		<ConceptsTable/>
 	</section>
