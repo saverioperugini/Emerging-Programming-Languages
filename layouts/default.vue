@@ -10,11 +10,7 @@
           class="navbar-item"
           href="/"
         >
-          <img
-            src="~assets/buefy.png"
-            alt="Buefy"
-            height="28"
-          >
+          <strong>CPS 452: Emerging Programming Languages</strong>
         </a>
 
         <div class="navbar-burger">
@@ -58,14 +54,14 @@ export default {
     return {
       items: [
         {
-          title: 'Home',
+          title: 'Languages',
           icon: 'home',
           to: { name: 'index' }
         },
         {
-          title: 'Inspire',
+          title: 'Projects',
           icon: 'lightbulb',
-          to: { name: 'inspire' }
+          to: { name: 'projects' }
         }
       ]
     }
