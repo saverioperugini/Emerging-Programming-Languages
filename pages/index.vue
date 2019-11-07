@@ -1,50 +1,13 @@
 <template>
 	<section class="section">
-		<div class="columns is-mobile">
-			<div class="column is-one-quarter">
-				<card title="CLIPS" icon="github-circle">
-					<b-button class="button is-link" type="is-primary">View Presentation</b-button>
-				</card>
-			</div>
-
-			<div class="column is-one-quarter">
-				<card title="Elixir" icon="github-circle">
-				<b-button class="button is-link" type="is-primary">View Presentation</b-button>
-				</card>
-			</div>
-
-			<div class="column is-one-quarter">
-				<card title="Factor" icon="github-circle">
-					<b-button class="button is-link" type="is-primary">View Presentation</b-button>
-				</card>
-			</div>
-
-			<div class="column is-one-quarter">
-				<card title="IO" icon="github-circle">
-					<b-button class="button is-link" type="is-primary">View Presentation</b-button>
-				</card>
-			</div>
-		</div>
-		
-		<div class="columns is-mobile">
-			<div class="column is-one-quarter">
-				<card title="Julia" icon="github-circle">
-					<b-button class="button is-link" type="is-primary">View Presentation</b-button>
-				</card>
-			</div>
-
-			<div class="column is-one-quarter">
-				<card title="Lua" icon="github-circle">
-					<b-button class="button is-link" type="is-primary">View Presentation</b-button>
-				</card>
-			</div>
-
-			<div class="column is-one-quarter">
-				<card title="PROLOG" icon="github-circle">
-					<b-button class="button is-link" type="is-primary">View Presentation</b-button>
-				</card>
-			</div>
-		</div>
+		<div class="columns is-mobile" v-for="chunk in chunkLangs">
+         <div class="column is-one-quarter" v-for="lang in chunk">
+            <card :title="lang.language" icon="github-circle">
+               <button class="button is-link">View Presentation</button>
+               <li v-for="file in lang.files">{{file}}</li>
+            </card>
+         </div>
+      </div>
 		<ConceptsTable/>
 	</section>
 </template>
@@ -52,21 +15,30 @@
 <script>
 	import Card from "~/components/Card"
 	import ConceptsTable from "../components/ConceptsTable";
-	
-	export default {
-		name: "HomePage",
-		
-		components: {
-			Card,
-			ConceptsTable
-		},
-		created() {
-		
-		},
-		data: () => ({
-			languages: []
-		})
-	}
+	import _ from 'lodash';  
+
+	export default {
+      name: "HomePage",
+      components: {
+         Card,
+         ConceptsTable
+      },
+      created() {
+         
+      },
+      computed: {
+         chunkLangs() {
+            return _.chunk(this.languages, 4)
+         }
+      },
+      mounted() {
+         this.$axios.$get('http://localhost:3000/languages')
+         .then(res => { this.languages = res })
+      },
+      data: () => ({
+         languages: []
+      })
+   }
 </script>
 
 <style lang="scss">
