@@ -484,6 +484,60 @@
 					"Dynamic Typing": 1,
 					"Heterogeneous Lists": 1
 				},
+				"Kotlin": {
+					"Paradigm": "mult",
+					"First-Class Functions": 1,
+					"λ Expressions": 1,
+					"Higher-Order Functions": 1,
+					"First-Class Closures": 1,
+					"Currying": 1,
+					"Continuation-Passing Style": 1,
+					"First-Class Continuations": 2,
+					"Pattern Matching": 0,
+					"Strong Typing": 1,
+					"Type Systems": 1,
+					"Lazy Evaluation": 1,
+					"List/Generator Comprehension": 1,
+					"Message Passing": 1,
+					"Actor Model of Concurrency": 1,
+					"Coroutines": 1,
+					"Channels": 1,
+					"Communicating Sequential Processes": 1,
+					"Homoiconic": 0,
+					"Concurrency": 1,
+					"Callbacks": 1,
+					"Type Inference": 1,
+					"Dynamic Dispatch": 0,
+					"Dynamic Typing": 0,
+					"Heterogeneous Lists": 0
+				},
+				"F#": {
+					"Paradigm": "fun",
+					"First-Class Functions": 1,
+					"λ Expressions": 1,
+					"Higher-Order Functions": 1,
+					"First-Class Closures": 1,
+					"Currying": 1,
+					"Continuation-Passing Style": 1,
+					"First-Class Continuations": 1,
+					"Pattern Matching": 1,
+					"Strong Typing": 1,
+					"Type Systems": 1,
+					"Lazy Evaluation": 2,
+					"List/Generator Comprehension": 1,
+					"Message Passing": 1,
+					"Actor Model of Concurrency": 1,
+					"Coroutines": 2,
+					"Channels": 2,
+					"Communicating Sequential Processes": 0,
+					"Homoiconic": 2,
+					"Concurrency": 1,
+					"Callbacks": 1,
+					"Type Inference": 1,
+					"Dynamic Dispatch": 1,
+					"Dynamic Typing": 0,
+					"Heterogeneous Lists": 0
+				},
 			}
 		}),
 		methods: {
@@ -495,6 +549,18 @@
 						return "checked";
 					case 2:
 						return "indeterminate";
+				}
+			},
+			checkboxOnClick: function (self) {
+				switch (self.classList[0]) {
+					case "checked":
+						self.checked = true;
+						break;
+					case "indeterminate":
+						self.indeterminate = true;
+						break;
+					default:
+						self.checked = false;
 				}
 			}
 		},

@@ -17,19 +17,26 @@ article {
 	margin: 0 18vw;
 }
 
+li {
+	margin-bottom: 6px;
+}
+
 code {
 	background-color: #EEEEEE;
 	font-family: 'Roboto Mono', monospace;
+	border: solid 1px gray;
+	padding: 0 2px;
 }
 
-code :not(table) {
-	border: solid 1px #DCDCDC;
-	padding: 0 2px;
+td code {
+	border: none !important;
+	background: none !important;
 }
 
 .code-block {
 	display: block;
 	margin-left: 6px;
+	margin-top: 6px;
 	width: fit-content;
 }
 
