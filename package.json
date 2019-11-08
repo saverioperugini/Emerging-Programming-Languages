@@ -11,13 +11,14 @@
     "generate": "nuxt generate"
   },
   "dependencies": {
+    "@nuxtjs/axios": "^5.8.0",
+    "fs": "0.0.1-security",
+    "ncp": "^2.0.0",
     "node-sass": "^4.13.0",
     "nuxt": "^2.0.0",
     "nuxt-buefy": "^0.3.2",
-    "sass-loader": "^8.0.0",
     "recursive-readdir": "^2.2.2",
-    "@nuxtjs/axios": "^5.8.0",
-    "fs": "0.0.1-security"
+    "sass-loader": "^8.0.0"
   },
   "devDependencies": {}
 }

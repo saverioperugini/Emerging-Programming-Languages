@@ -1,10 +1,25 @@
 <template>
 	<section class="section">
 		<div class="columns is-mobile" v-for="chunk in chunkLangs">
-         <div class="column is-one-quarter" v-for="lang in chunk">
+         <div class="column is-one-quarter" v-for="(lang, index) in chunk">
             <card :title="lang.language" icon="github-circle">
-               <button class="button is-link">View Presentation</button>
-               <li v-for="file in lang.files">{{file}}</li>
+               <b-button class="button" type="is-primary" @click="lang.on=true">View Presentation</b-button>
+               
+					<b-modal :active.sync="lang.on" :width="980">
+						<div class="card" v-for="file in lang.files">
+							<div class="card-content">
+								<div class="media">
+									<div class="media-content">
+										<p class="title is-4">{{file.name}}</p>
+									</div>
+								</div>
+
+								<div class="content">
+									<iframe :src="file.path"></iframe>
+								</div>
+							</div>
+						</div>
+					</b-modal>
             </card>
          </div>
       </div>
@@ -33,10 +48,13 @@
       },
       mounted() {
          this.$axios.$get('http://localhost:3000/languages')
-         .then(res => { this.languages = res })
+         .then(res => { 
+				console.log(res); 
+				this.languages = res;
+			})
       },
       data: () => ({
-         languages: []
+         languages: [],
       })
    }
 </script>
