@@ -17,6 +17,10 @@ article {
 	margin: 0 18vw;
 }
 
+p {
+	padding-left: 18px;
+}
+
 li {
 	margin-bottom: 6px;
 }
@@ -31,6 +35,11 @@ code {
 td code {
 	border: none !important;
 	background: none !important;
+}
+
+
+tr:nth-child(2n) {
+	background-color: lightgray;
 }
 
 .code-block {

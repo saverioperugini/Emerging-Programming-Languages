@@ -590,7 +590,7 @@
 	}
 	
 	tbody tr:nth-child(2n) {
-		background: #ddd;
+		background: #B4FFC8;
 	}
 	
 	td:nth-child(n + 2), th:nth-child(n + 2) {
