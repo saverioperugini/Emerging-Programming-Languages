@@ -27,11 +27,11 @@ app.get("/", function(req, res) {
 
     files.forEach(item => {
       if (item.includes("html") || item.includes("pdf")) {
-        var parts = item.split("/");
+        let parts = item.split("/");
         if (languages.includes(parts[1])) {
           let i = getIndex(parts[1], languagesObj);
 
-          var f = {
+          let f = {
             name: parts[parts.length - 1],
             path: "http://localhost:3000/" + parts.slice(1).join("/")
           };
