@@ -22,7 +22,7 @@
 				<ul class="menu-list">
 					<li v-for="(item, key) of items" :key="key">
 						<nuxt-link :to="item.to" exact-active-class="is-active">
-							<b-icon pack="fas" :icon="item.icon"/>
+							<b-icon :icon="item.icon"/>
 							{{ item.title }}
 						</nuxt-link>
 					</li>
@@ -48,7 +48,7 @@
 					},
 					{
 						title: "Projects",
-						icon: "code",
+						icon: "code-tags",
 						to: {name: "projects"}
 					}
 				]

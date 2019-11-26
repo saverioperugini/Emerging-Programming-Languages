@@ -1,10 +1,10 @@
 <template>
 	<section class="section">
 		<div class="columns is-mobile" v-for="chunk in chunkLangs" :key="chunk">
-			<card :title="lang.language" icon="github-circle" class="column is-one-quarter" v-for="lang in chunk" :key="lang">
+			<Card :title="lang.language" v-bind:icon="logos[lang.language]" class="column is-one-third" v-for="lang in chunk" :key="lang">
 				<div style="display: flex; flex-direction: column; justify-content: center; padding: 0">
 					<b-button class="button" type="is-primary" style="margin-bottom: 5px" @click="lang.on=true">Presentation</b-button>
-					<b-button class="button" type="is-primary" style="margin-bottom: 5px" @click="lang.on=true">Cheat Sheet</b-button>
+					<b-button class="button" type="is-primary" style="margin-bottom: 5px" @click="lang.on=true">Reference / Synopsis</b-button>
 					<b-button class="button" type="is-primary" style="margin-bottom: 5px" @click="lang.on=true">Notes</b-button>
 				</div>
 				<b-modal :active.sync="lang.on" :width="980" :height="640">
@@ -16,12 +16,8 @@
 						</div>
 					</div>
 				</b-modal>
-			
-			</card>
-		
+			</Card>
 		</div>
-		
-		<!--		</div>-->
 		<ConceptsTable/>
 	</section>
 </template>
@@ -41,8 +37,8 @@
 		},
 		computed: {
 			chunkLangs() {
-				let x = _.chunk(this.languages, 4);
-				console.log(x)
+				let x = _.chunk(this.languages, 3);
+				console.log(x);
 				return x
 			}
 		},
@@ -54,7 +50,29 @@
 				})
 		},
 		data: () => ({
-			languages: []
+			languages: [],
+			logos: {
+				"CLIPS":      "http://clipsrules.net/clipslogo.png",
+				"Clojure":    "https://clojure.org/images/clojure-logo-120b.png",
+				"Elixir":     "https://elixir-lang.org/images/logo/logo.png",
+				"Elm":        "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f3/Elm_logo.svg/1024px-Elm_logo.svg.png",
+				"F#":         "https://fsharp.org/img/logo/fsharp256.png",
+				"Factor":     "https://upload.wikimedia.org/wikipedia/en/f/ff/NewFactorLogo.png",
+				"Go":         "https://golang.org/lib/godoc/images/go-logo-blue.svg",
+				"Haskell":    "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1c/Haskell-Logo.svg/1280px-Haskell-Logo.svg.png",
+				"Idris":      "https://pbs.twimg.com/profile_images/838385415132413952/6UQFD8wV_400x400.jpg",
+				"Io":         "https://upload.wikimedia.org/wikipedia/commons/thumb/2/26/Io-logo.svg/1024px-Io-logo.svg.png",
+				"Java":       "https://upload.wikimedia.org/wikipedia/en/thumb/3/30/Java_programming_language_logo.svg/800px-Java_programming_language_logo.svg.png",
+				"JavaScript": "https://i.stack.imgur.com/Mmww2.png",
+				"Julia":      "https://julialang.org/v2/img/logo.svg",
+				"Kotlin":     "https://upload.wikimedia.org/wikipedia/commons/thumb/7/74/Kotlin-logo.svg/1024px-Kotlin-logo.svg.png",
+				"Lua":        "https://www.lua.org/images/logo.gif",
+				"Python":     "https://upload.wikimedia.org/wikipedia/commons/c/c3/Python-logo-notext.svg",
+				"R":          "https://upload.wikimedia.org/wikipedia/commons/1/1b/R_logo.svg",
+				"Racket":     "https://racket-lang.org/img/racket-logo.svg",
+				"Ruby":       "https://upload.wikimedia.org/wikipedia/commons/thumb/7/73/Ruby_logo.svg/1024px-Ruby_logo.svg.png",
+				"Swift":      "https://developer.apple.com/assets/elements/icons/swift/swift-64x64.png"
+			}
 		})
 	}
 </script>

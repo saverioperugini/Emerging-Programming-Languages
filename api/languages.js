@@ -25,7 +25,7 @@ app.get("/", function(req, res) {
       console.log("done!");
     });
     
-    files = files.map(path => path.replace(/\\/gm, "/"));
+    files = files.map(path => path.replace(/\\/gm, "/")).sort();
     
     files.forEach(item => {
       if (item.includes("html") || item.includes("pdf")) {
