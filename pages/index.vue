@@ -8,7 +8,7 @@
 					<b-button v-if="lang.synopsis" class="button" type="is-primary" style="margin-bottom: 5px" @click="lang.synopsis.modal=true">Synopsis</b-button>
 					<b-button v-if="lang.notes" class="button" type="is-primary" style="margin-bottom: 5px" @click="lang.notes.modal=true">Notes</b-button>
 				</div>
-				<b-modal :active.sync="lang.presentation.modal" :width="980" :height="640">
+				<!--<b-modal :active.sync="lang.presentation.modal" :width="980" :height="640">
 					<div class="card" style="height: 640px; overflow-y: hidden; padding: 0">
 						<div class="card-content" style="padding: 0">
 							<div class="content">
@@ -16,13 +16,13 @@
 							</div>
 						</div>
 					</div>
-				</b-modal>
+				</b-modal>-->
 				
 				<b-modal :active.sync="lang.reference.modal" :width="980" :height="640">
 					<div class="card" style="height: 640px; overflow-y: hidden; padding: 0">
 						<div class="card-content" style="padding: 0">
 							<div class="content">
-								<iframe :src="lang.reference" width="980" style="height: 640px"></iframe>
+								<iframe :src="lang.reference.path" width="980" style="height: 640px"></iframe>
 							</div>
 						</div>
 					</div>
@@ -32,7 +32,7 @@
 					<div class="card" style="height: 640px; overflow-y: hidden; padding: 0">
 						<div class="card-content" style="padding: 0">
 							<div class="content">
-								<iframe :src="lang.synopsis" width="980" style="height: 640px"></iframe>
+								<iframe :src="lang.synopsis.path" width="980" style="height: 640px"></iframe>
 							</div>
 						</div>
 					</div>
@@ -42,7 +42,7 @@
 					<div class="card" style="height: 640px; overflow-y: hidden; padding: 0">
 						<div class="card-content" style="padding: 0">
 							<div class="content">
-								<iframe :src="lang.notes" width="980" style="height: 640px"></iframe>
+								<iframe :src="lang.notes.path" width="980" style="height: 640px"></iframe>
 							</div>
 						</div>
 					</div>

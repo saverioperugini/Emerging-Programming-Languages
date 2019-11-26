@@ -1,9 +1,6 @@
 let recursive = require("recursive-readdir");
-let fs = require("fs");
 let express = require("express");
-let ncp = require("ncp").ncp;
 let app = express();
-ncp.limit = 16;
 
 function getIndex(key, array) {
   for (i = 0; i < array.length; i++) {
@@ -17,14 +14,8 @@ function getIndex(key, array) {
 app.get("/", function(req, res) {
   let languages = [];
   let languagesObj = [];
-  recursive("student-languages", function(err, files) {
-    ncp("student-languages", "static", function(err) {
-      if (err) {
-        console.error(err);
-      }
-      console.log("done!");
-    });
-    
+
+  recursive("static", function(err, files) {  
     files = files.map(path => path.replace(/\\/gm, "/")).sort();
     
     files.forEach(item => {
@@ -33,37 +24,41 @@ app.get("/", function(req, res) {
         if (languages.includes(parts[1])) {
           let i = getIndex(parts[1], languagesObj);
 
-          let f = {
-            name: parts[parts.length - 1],
-            path: "http://localhost:3000/" + parts.slice(1).join("/")
-          };
+          if(item.includes("html")) {
+            languagesObj[i].notes.path = "http://localhost:3000/" + parts.slice(1).join("/")
+          } else if(parts.includes('reference')) {
+            languagesObj[i].reference.path = "http://localhost:3000/" + parts.slice(1).join("/")
+          } else if(parts.includes('synopsis')) {
+            languagesObj[i].synopsis.path = "http://localhost:3000/" + parts.slice(1).join("/")
+          }
 
-          languagesObj[i].files.push(f);
         } else {
           languages.push(parts[1]);
 
           let lang = {
             language: parts[1],
-            files: [],
-            on: false
-          };
+            notes: {
+              modal: false,
+              path: ''
+            },
+            reference: {
+              modal: false,
+              path: ''
+            },
+            synopsis: {
+              modal: false,
+              path: ''
+            }
+          }
 
-          /*let d = JSON.parse(JSON.stringify(parts));
-          d.shift();
-          d.pop();
-          d = "static/" + d.join("/") + "/pl.css";
+          if(item.includes("html")) {
+            lang.notes.path = "http://localhost:3000/" + parts.slice(1).join("/")
+          } else if(parts.includes('reference')) {
+            lang.reference.path = "http://localhost:3000/" + parts.slice(1).join("/")
+          } else if(parts.includes('synopsis')) {
+            lang.synopsis.path = "http://localhost:3000/" + parts.slice(1).join("/")
+          }
 
-          fs.copyFile("static/pl.css", d, err => {
-            if (err) throw err;
-            console.log("source.txt was copied to destination.txt");
-          });*/
-
-          let f = {
-            name: parts[parts.length - 1],
-            path: "http://localhost:3000/" + parts.slice(1).join("/")
-          };
-
-          lang.files.push(f);
           languagesObj.push(lang);
         }
       }
