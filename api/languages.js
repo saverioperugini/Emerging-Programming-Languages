@@ -3,8 +3,8 @@ let express = require("express");
 let app = express();
 
 function getIndex(key, array) {
-  for (i = 0; i < array.length; i++) {
-    if (array[i].language == key) {
+  for (let i = 0; i < array.length; i++) {
+    if (array[i].language === key) {
       return i;
     }
   }
@@ -49,7 +49,7 @@ app.get("/", function(req, res) {
               modal: false,
               path: ''
             }
-          }
+          };
 
           if(item.includes("html")) {
             lang.notes.path = "http://localhost:3000/" + parts.slice(1).join("/")

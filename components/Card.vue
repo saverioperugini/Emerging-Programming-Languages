@@ -5,6 +5,9 @@
 				<p class="card-header-title is-size-5 has-text-grey">
 					{{ title }}
 				</p>
+				<a class="has-text-grey" target="_blank" :href="'https://github.com/saverioperugini/Emerging-Languages-Spring-2017/tree/master/static/' + title">
+					<b-icon icon="code-not-equal-variant" type="is-large"></b-icon>
+				</a>
 			</header>
 			<div class="card-content">
 				<div class="content has-text-centered" style="height: 15vw; text-align: center">
@@ -17,10 +20,8 @@
 				</div>
 			</div>
 			<footer class="card-footer">
-				<div class="card-footer-item">
-          <span>
-            <slot/>
-          </span>
+				<div class="card-footer-item" style="justify-content: space-around">
+					<slot/>
 				</div>
 			</footer>
 		</div>
