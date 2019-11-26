@@ -1,0 +1,461 @@
+<html>
+<head>
+<link rel="stylesheet" type="text/css" href="pl.css"/>
+<title>Introduction to the Io Programming Language</title>
+</head>
+
+<!--
+Author: Nicolaas A. Scheltens
+
+CPS 499-03: Emerging Languages, Spring 2017
+-->
+
+<body>
+
+<table border="0" width="80%">
+<tr>
+<td>
+
+<h1 align="center">Introduction to the Io Programming Language</h1>
+<hr align="center" width="80%" size="10"/>
+
+<b>Author</b>: Nicolaas A. Scheltens<br/>
+<br/>
+<b>CPS 499-03: Emerging Languages, Spring 2017</b>
+
+<!-- Key Concepts -->
+<h2><hr align="left" width="40%"/>Key language concepts in Io
+<hr align="left" width="40%"/></h2>
+<ul>
+<li>Pure object-oriented language: everything is an object.</li>
+<li>Prototype-based object model;
+classes and instances are indistinguishable.</li>
+<li>Objects communicate through messages.</li>
+<li>Uses the Actor model of concurrency.</li>
+<li>Influenced by Smalltalk.</li>
+<li>No pointers.</li>
+</ul>
+<!-- Key Concepts end -->
+
+<!-- Objects -->
+<h2><hr align="left" width="40%"/>
+Objects
+<hr align="left" width="40%"/></h2>
+Everything in Io is a object: integers, booleans, floats, and messages.
+All entities are objects that can be 
+passed to other objects through messages, which are also objects.<br/>
+<ul>
+<li>there are no pointers, or all object have distinct pointers.</li>
+<li>all created objects are called <i>prototypes</i> or <i>instances</i>.</li>
+<li>all objects contain a list of <i>slots</i> or key/value pairs.</li>
+<li>one root of the inheritance hierarchy with the name <tt>Object</tt>.</li>
+</ul>
+
+Example new prototype creation:<br/>
+<pre>
+Io> Animal := Object clone
+==> Animal_0x1e95638
+  type = "Animal"
+</pre>
+
+All new prototypes create a new type with
+the values being the name of the object. Instances inherit the type
+of the prototype from which they where <tt>clone</tt>d.<br/>
+<br/>
+When an object receives a message, it searches its slots for a match. If no match is found, 
+then the object sends the message to its prototype. If a message
+is received, and it does not have the correct slot,
+and none of its prototypes contain the correct slot,
+then an error is thrown. This is called <i>dynamic binding</i>.
+
+<ul>
+<li>All prototypes are stored in the <tt>Lobby</tt> object.</li>
+<li>Methods can be assigned to object slots like any other assignment.</li>
+</ul>
+
+<!-- Objects end -->
+
+<!-- Lists and Maps -->
+<h2><hr align="left" width="40%"/>
+Lists and Maps
+<hr align="left" width="40%"/></h2>
+Io has two types of collections: list and maps.<br/>
+<pre>
+Io> Alist := list("some","things")
+==> list("some","things")
+</pre>
+The following are useful list slots.<br/>
+<ul>
+<li><tt>Alist size</tt>: returns size</li>
+<li><tt>Alist append("more")</tt>: adds the value to the end of the list.</li>
+<li><tt>list(1, 2, 3) average</tt>: averages integers or floats.</li>
+<li><tt>list(1, 2, 3) sum</tt>: sums integers or floats.</li>
+<li><tt>Alist at(1)</tt>: return element at value.</li>
+<li><tt>Alist pop</tt>: removes last element in list, returns element.</li>
+<li><tt>Alist prepend("A")</tt>: adds element at the front of the list.</li>
+<li><tt>Alist isEmpty</tt>: returns true or false if the list is empty.</li>
+</ul>
+Maps, on the other hand, are built by cloning the map object.<br/>
+<ul>
+<li>add elements by using <tt>atPut(key, value)</tt>.</li>
+<li>get a value by using <tt>at(key)</tt>.</li>
+<li><tt>asObjects</tt>: returns the map as slots.</li>
+<li><tt>asList</tt>: returns the map as a list of lists.</li>
+<li><tt>keys</tt>: returns the keys of the map in a list.</li>
+</ul>
+<!-- Lists and Maps end -->
+
+<!-- Concurrency -->
+<h2><hr align="left" width="40%"/>
+Concurrency
+<hr align="left" width="40%"/></h2>
+Io uses the Actor model of concurrency. Each actor
+is modeled as a coroutine.<br/>
+<pre>
+Io> AObject waitRoutine := method(wait(3);"A done waiting - " print)
+==> method(
+wait(3);writeln("done waiting")
+)
+Io> BObject waitRoutine := method(wait(2);"B done waiting - " print)
+==> method(
+wait(2);writeln("done waiting")
+)
+Io> AObject @@waitRoutine;BObject @@waitRoutine; wait(4);"Main" print
+B done waiting - A done waiting - Main
+==> nil
+</pre>
+
+The program above creates two objects and starts both. Even though
+<tt>AObject</tt> is declared first, <tt>BObject</tt> still finishes before
+<tt>AObject</tt> because we started each (approximately) at the same time.
+
+<ul>
+<li>the <tt>@@</tt> operator
+creates an actor that will run the following object.</li>
+<li><tt>yield</tt> can be used to halt an actor.</li>
+<li>actors will automatically yield after they have sent a message.</li>
+</ul>
+
+<h2><hr align="left" width="40%"/>
+A Synchronization Barrier
+<hr align="left" width="40%"/></h2>
+<ul>
+<pre>
+Barrier := Object clone
+Barrier clientNum := 0
+Barrier clientList := List clone
+Barrier clientArrive := method(clientName, 
+   clientList append(call sender)
+   "#{clientName} has arrived at the barrier" interpolate println
+   clientNum = clientNum - 1
+   if(clientNum == 0, done)
+)
+Barrier done := method(clientList foreach(v, v leaving()))
+   
+Client := Object clone
+Client cnum ::= 0
+Client ready := method(
+   wait(2)
+   Wild 
+   Barrier clientArrive("Client#{cnum}" interpolate)
+)
+Client Wild := method(if(cnum%2 == 0, wait(Random value(3))))
+Client leaving := method("Client#{cnum} is leaving the barrier" interpolate println)
+
+"Enter how many clients" println
+snums := File standardInput readLine
+nums := snums asNumber
+Barrier clientNum = nums
+
+for(i,1,nums,
+   iClient := Client clone setCnum(i)
+   iClient @ready()
+   "Started a client"println
+)
+Coroutine currentCoroutine pause
+</pre>
+</ul>
+
+<h2><hr align="left" width="40%"/>
+Matrix Multiplication
+<hr align="left" width="40%"/></h2>
+
+<ul>
+<pre>
+Mat := Object clone
+MatMult := Object clone
+ProcessFile := Object clone
+f := File with("Matrix.txt")
+f openForReading
+
+ProcessFile inList := f readLines
+ProcessFile build := method(
+   for(a, 0, (inList size) - 1,
+      if(a == 0, 
+         s := inList at(a) split
+         if(s at(1) != s at(3), Exception raise("Can not Multiply"))
+         Mat height = s at(0) asNumber
+         Mat width = s at(4) asNumber
+         buildMat2
+         builddList
+      )
+      if(a > 0 and a < (Mat height) + 1,
+         s := inList at(a) split
+         tList := List clone
+         for(b, 1, (s size - 2), 
+            tList append(s at(b) asNumber)
+         )
+         Mat mat1 append(tList)
+      )
+      if(a > (Mat height) + 1, 
+         s := inList at(a) split
+         for(c, 1, (s size - 2),
+            Mat mat2 at(c - 1) append(s at(c) asNumber)
+         )
+      )
+   )
+)
+ProcessFile buildMat2 := method(
+   x := List clone
+   for(d, 1, Mat width,
+      x append(List clone)
+   )
+   Mat mat2 = x
+)
+ProcessFile builddList := method(
+   for(e, 1, Mat height,
+      Mat dList append(List clone) 
+      for(f, 1, Mat width,
+         Mat dList at(e-1) append(f)
+      )
+   )
+)
+
+Mat height := 2
+Mat width := 2
+Mat mat1 := List clone
+Mat mat2 := List clone
+Mat dList := List clone
+Mat placeAtd := method(h, w, v, dList atPut(h, dList at(h) atPut(w, v)))
+
+MatMult getNum := method(alist, blist,
+   x := 0;
+   for(i, 1, alist size,
+      x = x + ((alist at(i-1)) * (blist at(i-1)));
+      x println;
+    )
+)
+MatMult placeAt := method(h, w,
+   wait(2) 
+   v := getNum(Mat mat1 at(h), Mat mat2 at(w))
+   Mat placeAtd(h, w, v)
+)
+
+ProcessFile build
+Mat mat1 println
+Mat mat2 println
+
+for(i, 1, Mat height,
+   for(b, 1, Mat width,
+      nMatMult := MatMult clone
+      nMatMult @placeAt(i-1, b-1);
+      "starting" println
+   )
+)
+while(Scheduler yieldingCoros size > 1, yield)
+f close
+Mat dList println
+</pre>
+</ul>
+
+The following is an example of an input file for the prior program.
+
+<pre>
+3 3 x 3 3
+[ 1 2 3 ]
+[ 4 5 6 ]
+[ 7 8 9 ]
+
+[ 10 11 12 ]
+[ 13 14 15 ]
+[ 16 17 18 ]
+</pre>
+<!-- Concurrency end -->
+
+<!-- Syntax -->
+<h2><hr align="left" width="40%"/>
+Reflection
+<hr align="left" width="40%"/></h2>
+
+In Io, any object/class can be expanded or modified by the programmer.
+
+<ul>
+
+<li>The following expression overwrites the <tt>print</tt> slot.
+
+<pre>
+Object print = "im printing something"
+</pre>
+</li>
+
+<li>Due to its uniform syntax, there is little to no syntactic sugar in
+Io.</li>
+
+<li>The <tt>OperatorTable</tt> is an object that contains all operators within
+the language.</li>
+
+<li>All objects and their associated slots can be displayed by entering them
+into the interpreter.</li>
+
+<li>New operators can be added using the <tt>addOperator</tt> message.
+<br/><br/></li>
+
+<li>Example:
+
+<pre>
+Io> OperatorTable addOperator("!", 9)
+...
+9   | !
+10  && and
+11  or ||
+...
+Io> ! = method(bool, if(bool, false, true))
+==> method(bool,
+   if(!bool, true, false)
+)
+Io> ! true
+==> false
+Io> ! false
+==> true
+</pre>
+</li>
+</ul>
+
+<!-- Syntax end-->
+
+
+<!-- Links -->
+
+<h2><hr align="left" width="40%"/>
+Useful Links & Resources
+<hr align="left" width="40%"/></h2>
+
+<ul>
+<li><a href="http://iolanguage.org/">
+Official Io Website</a></li>
+<li><a href="https://en.wikibooks.org/wiki/Io_Programming">
+Wikibooks tutorial</a></li>
+<li><a href="https://ozone.wordpress.com/2006/03/15/blame-it-on-io/">
+Blog post about basic Io</a></li>
+</ul>
+
+<!-- Links End -->
+
+<h2><hr align="left" width="40%"/>
+Exercises
+<hr align="left" width="40%"/></h2>
+
+The following are some programming exercises that incorporate some essential
+Io concepts:
+
+<ul>
+
+<li>Create a prototype that reads a string of numbers from standard input and
+transforms that string into a list of numbers. Create an 
+<tt>exponent</tt> slot that
+accepts two integers as input and returns the first number raised to the
+second number power. Send the <tt>exponent</tt> message to every integer in
+the newly-created list using the last integer as the exponent and print the
+modified list.<br/>
+
+<br/>
+Examples:
+
+<pre>Io> 1 2 3 4 5 2
+==> list(1, 4, 9, 25)
+Io> 2 3 7 1 5 3
+==> list(16, 81, 2401, 1, 625)
+</pre>
+</li>
+
+<li>Use coroutines and the Actor model to create a 
+synchronization barrier. Read the number of
+workers to be spawned as well as the capacity of the barrier as an integer
+from standard input. The barrier must wait for all workers to arrive before
+allowing any workers through the barrier.<br/><br/>
+ 
+Examples:
+
+<pre>
+Io> 3
+Started a worker.
+Started a worker.
+Started a worker.
+Worker2 has arrived at the barrier.
+Worker1 has arrived at the barrier.
+Worker3 has arrived at the barrier.
+Worker2 is through the barrier.
+Worker1 is through the barrier.
+Worker3 is through the barrier.
+</pre>
+</li>
+
+</ul>
+
+<!--  References Section -->
+<!------------------------->
+<!------------------------->
+<!------------------------->
+<h2><hr align="left" width="40%"/>References</h2>
+<ul>
+<table>
+
+<!-- Reference #3 -->
+<tr>
+<td valign="top">[PWC]</td>
+<td>J.A. Gallud, R. Tesoriero, and P. Gonz&aacute;lez. 2012.
+<a href="http://ieeexplore.ieee.org/document/6354446/">
+Smalltalk: The leading language to learn object-oriented programming</a>.
+In <i>Proceedings of the Federated Conference on Computer Science and
+Information Systems</i>. IEEE Computer Society Press,
+Los Alamitos, CA, 839-840.
+</td>
+</tr>
+
+<!-- Reference #2 -->
+<tr>
+<td valign="top">[RAOO]</td>
+<td>W. LaLondet, J. McGugan, and D. Thomas. 1989
+<a href="http://ieeexplore.ieee.org/document/65106/">
+The Real Advantages of Pure Object-Oriented Systems or Why Object-Oriented Extensions to C are Doomed to Fail</a>.
+In <i>Proceedings of the 13<sup>th</sup>
+Annual International Computer Software and
+Applications Conference</i>. IEEE Computer Society Press,
+Los Alamitos, CA, 344-350.
+</td>
+</tr>
+
+<!-- Reference #1 -->
+<tr>
+<td valign="top">[PWC]</td>
+<td>Z. Li and E. Kraemer. 2013.
+<a href="http://ieeexplore.ieee.org/document/6651021/">
+Programming with Concurrency: Threads, Actors, and Coroutines</a>.
+In <i>Proceedings of the IEEE 27<sup>th</sup> International Symposium on
+Parallel and Distributed Processing Workshops and Ph.D. Forum</i>.
+IEEE Computer Society Press,
+Los Alamitos, CA, 1304-1311.
+</td>
+</tr>
+
+</table>
+</ul>
+<!-- References Section End -->
+
+<hr align="center" width="80%" size="10"/>
+<a href="index.html"><img src="http://academic.udayton.edu/SaverioPerugini/images/rh.jpg" alt="Return Home" border="0"/></a>
+</td>
+</tr>
+</table>
+</body>
+</html>

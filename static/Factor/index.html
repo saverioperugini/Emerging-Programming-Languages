@@ -1,0 +1,468 @@
+<html>
+<head>
+<link rel="stylesheet" type="text/css" href="pl.css"/>
+<title>Introduction to the Factor Programming Language</title>
+</head>
+
+<!--
+Author: Zackery L. Arnold
+
+CPS 499-03: Emerging Languages, Spring 2017
+-->
+
+<body>
+
+<table border="0" width="80%">
+<tr>
+<td>
+
+<h1 align="center">Introduction to the Factor Programming Language</h1>
+<hr align="center" width="80%" size="10"/>
+
+<b>Author</b>: Zackery L. Arnold
+<br/>
+<br/>
+<b>CPS 499-03: Emerging Languages, Spring 2017</b>
+
+<h2><hr align="left" width="40%"/>Key language concepts in Factor
+<hr align="left" width="40%"/></h2>
+<ul>
+<li> Factor = Object-Oriented + Functional + Stack Balancing</li>
+<li> Factor is an object-oriented language that utilizes functional programming execution and
+a stack based data flow to create powerful and expressive programs. [FDSL]</li>
+<li> Developed by Slava Pestov, a Russian-American programmer who now works at Apple developing
+the Swift programming language.</li>
+<li> Heavily influenced by Forth, the progenitor concatenative and stack-based programming language [ABIF].</li>
+<li> Factor's name comes from the belief that 'factoring out' common basic functions is necessary
+and useful for expressive concatenative programs.</li>
+<li> In the concatenative tradition functions are idiomatically called <b><i>words</i></b> and 
+collections of words are called <b><i>vocabularies.</i></b></li>
+<li> Higher order words called <b><i>combinators</i></b> are essential to minimizing 
+code definitions.</li>
+<li> All values are objects and objects share <b><i>generic words</i></b> that serve a role
+similar to template functions in other languages.</li>
+<li> Types are generally enforced only by whether or not a given generic word
+is defined for the given object's class.</li>
+<li> The combination of simple syntax and strict rules for managing the stack encourage the
+programmer to write terse and specific code.</li>
+<li> Overall, Factor demands that the programmer take responsibility for errors with
+a 'let it crash' philosophy.</li>
+<li> Factor is a general purpose language that is deeply tied to its development environment
+and features a wide range of mature vocabularities for a variety of use cases.</li>
+</ul>
+
+<h2><hr align="left" width="40%"/>
+Core Factor
+<hr align="left" width="40%"/></h2>
+<ul>
+<li>Short and expressive words are always the goal</li>
+<li>Combinators are encouraged where applicable</li>
+<li>Stack shuffling is useful but should be minimized</li>
+<li>Stack effect is required for documentation and practical reasons</li>
+<li>Objects do not own their own methods, but can have member variables</li>
+<li>Derived classes are easily obtained through simple set theory operations</li>
+<li>Generic words encourage safe and effective code reuse, even across classes</li>
+<li>Lazy evaluation is present, such as the <tt>[a,b]</tt> word that produces 
+a promise of a range on a to b</li>
+</ul>
+
+<!-- Concatentative Programming -->
+<h2><hr align="left" width="40%">
+Concatenative Programming
+<hr align="left" width="40%"></h2>
+A <b><i>concatenative</i></b> programming language operates by
+concatenating smaller programs (or functions) together
+to create a new program. [CPLW]<br/>
+<ul>
+<li> Similar in concept to filter pipelining in Linux/Unix.</li>
+<li> Evaluations occur by concatenating several functions that all operate
+on a single piece of data that is transformed along the way.</li>
+<li> To fit this paradigm, functions in Factor are called <b><i>words</i></b>,
+and the space character is not-so-jokingly called the <b><i>concatenation operator</i></b>.</li>
+</ul>
+For example, consider the following program, which computes the factorial of 10:<br/>
+<pre>
+10 [1,b] 1 [ * ] reduce
+
+--- Data stack:
+3628800
+</pre>
+The number 10 is taken from the stack, used to generate an array of range 1 to 10, and finally reduced 
+through product multiplication applied to all of the elements.<br/>
+This form of programming fits well with filter pipelining heavily used in Linux/Unix. 
+Consider the following program that collects capital letters from a character array:<br/>
+<pre><tt>{ "T" "E" "s" "T" } [ upper? ] filter
+
+--- Data stack:
+{ "T" "E" "T" }
+</tt></pre>
+<!-- End of Concatenative Programming -->
+
+<!-- Stack Based  -->
+<h2><hr align="left" width="40%">
+Stack-Based Programming
+<hr align="left" width="40%"></h2>
+A <b><i>stack-based</i></b> programming language loads operands onto a data stack. Words that
+use the operands <b><i>pop</i></b> operands from the stack and <b><i>push</i></b> back
+the results.<br/>
+<ul>
+<li> This is separate from the stack reffered to from the realm of memory allocation.</li>
+<li> The data stack is a 'global' region, but scope is effectively introduced through the concept of <b><i>stack effect.</i></b></li>
+<li> The data stack may be manipulated using certain words, such as <tt><b>dup</b></tt> that duplicates the item on the top of the stack,
+or <tt><b>swap</b></tt> which swaps the top and second-from-top items.</li>
+</ul>
+For example, consider the following Factor sequence that evaluates <tt>(1 - (2 * (3 + 4)))</tt>:<br/>
+<pre>
+IN: scratchpad 1 2 3
+
+--- Data stack:
+1
+2
+3
+IN: scratchpad 4 + * -
+
+--- Data stack:
+-13
+</pre>
+<!-- End of Stack-Based -->
+
+<!-- Stack Effects  -->
+<h2><hr align="left" width="40%">
+Stack Effects
+<hr align="left" width="40%"></h2>
+A <b><i>stack effect</i></b> is a part of a word declaration in Factor that serves for both documentation and very basic argument pattern matching.
+<ul>
+<li> Stack effects are declared using the '<tt>( input ... -- output ... )</tt>' word composition.
+<li> All defined words must include an explicit stack effect declaration.</li>
+<li> Stack effects are checked during compilation of code and produce errors when ignored.</li>
+</ul>
+Consider the following formal definition of a factorial function:
+<pre>
+: fact ( n -- n! ) [1,b] 1 [ * ] reduce ;
+</pre>
+The stack effect '<tt>( n -- n! )</tt>' above notes that a item 'n' at the top of the stack 
+will be consumed and replaced by an item 'n!'.<br/>
+(Remember that arbitrary characters have no special meaning without surrounding spaces.)
+<br/>
+<!-- End of Stack Effects -->
+
+<!-- Stack Checker  -->
+<h2><hr align="left" width="40%">
+Stack Checker (Error Detection)
+<hr align="left" width="40%"></h2>
+The <b><i>stack checker</i></b> is a tool built into the Factor Listener that additionally checks for and enforces consistency
+in the execution of words.<br/>
+Specifically, the stack checker ensures that words with branching control flow have the same
+general stack effect across all branches.
+<ul>
+<li> In practice, this means that a word will always leave the stack at the same height after execution.</li>
+<li> Pestov and the other authors argue that stack-checking is necessary to reduce the chance for hard to detect bugs
+ caused by inconsistent stack effect.</li>
+<li> Additionally, without stack checking it is easy for the programmer to miss edge-case conditions during unit testing.</li>
+</ul>
+<!-- End of Stack Checker -->
+
+<!-- Stack Shuffling -->
+<h2><hr align="left" width="40%">
+Stack Shuffling
+<hr align="left" width="40%"></h2>
+Data stacks have a unique challenge when it comes to visualizing the hierarchy of data throughout a program.<br/>
+In some situations the programmer will find that they need to reorganize items on the stack in order to 
+accomplish some task.<br/>
+For instance, consider the following function which determines if <tt>a</tt> 
+is a multiple of <tt>b</tt>:<br/>
+<pre>
+: multiple? ( a b -- ? ) swap divisor? ; inline
+</pre>
+This word takes advantage of the <tt>divisor?</tt> word to determine multiples. After all, if <tt>a</tt> is a 
+multiple of <tt>b</tt> then <tt>b</tt> must be divisible by <tt>a</tt>.<br/>
+In order to use this straightforward observation the word '<tt>swap</tt>' is used to swap the pair of items on the top of the stack, giving the 
+<tt>divisor?</tt> word a whole new implication.<br/>
+Some common stack shuffling words and their stack effects are:
+<ul>
+<li><tt>swap ( x y -- y x )</tt> simply swaps the two topmost items on the stack.</li>
+<li><tt>dup ( x -- x x )</tt> duplicates the topmost item on the stack</li>
+<li><tt>drop ( x -- )</tt> removes the item on the top of the stack.</li>
+<li><tt>nip ( x y -- y )</tt> removes the item just below the topmost stack item.</li>
+<li><tt>over ( x y -- x y x )</tt> duplicates the second item from the top and places it on the top.</li>
+</ul>
+<!-- End of Stack Shuffling -->
+
+<!-- Combinators -->
+<h2><hr align="left" width="40%">
+Combinators
+<hr align="left" width="40%"></h2>
+<b><i>Combinators</i></b> are higher-order words that take other words as arguments and apply theme
+to the data stack in a unique way.<br/>
+Some common combinators include:
+<ul>
+<li><tt>dip</tt> takes a word as an argument, saves the topmost item of the stack, applies the word to the remaining stack,
+and then returns the saved element to the top of the stack.</li>
+<li><tt>bi</tt> takes a item off the stack and two additional words. It then applies the word to each item, resulting
+in two separate results that are placed on the stack.</li>
+<li><tt>tri</tt> extends <tt>bi</tt> by applying three words to a given item, resulting in three items in the stack.</li>
+<li><tt>cleave</tt> is the ultimate extension of the previous words, taking an unbounded number of words and leaving an
+unbounded number of results.</li>
+<li><tt>reduce</tt> takes a list, an accumulator, and a word, and applies the word to each element of the list,
+adding the result of each cycle to the accumulator.</li>
+<li><tt>map</tt> takes a list and a word and produces a new list obtained by applying the word to each element of the
+original list.</li>
+<li><tt>filter</tt> takes a list and a predicate and returns the items of the list that successfully match the predicate.</li>
+</ul>
+<!-- End of Combinators -->
+
+<!-- Combinators -->
+<h2><hr align="left" width="40%">
+Quotations
+<hr align="left" width="40%"></h2>
+<b><i>Quotations</i></b> are anonymous functions in Factor that can be used as arguments for
+various combinators. <br/>
+<ul>
+<li>Quotations are denoted through the use of the <tt>[</tt> and <tt>]</tt> parsing words.</li>
+<li>Like defined words, quotations must have consistent stack effects for successful compilation. </li>
+<li>They may be partially applied through the a specific syntax. For example,
+<tt>10 '[ _ = ]</tt> produces the quotation <tt>[ 10 = ]</tt>.</li>
+</ul>
+<!-- End of Quotations -->
+
+<!-- Combinators -->
+<h2><hr align="left" width="40%">
+Vocabularies
+<hr align="left" width="40%"></h2>
+<b><i>Vocabularies</i></b> are collections of words, similar to libraries and namespaces in other languages.<br/>
+<ul>
+<li>Vocabularies made by the user are traditionally placed in the <tt>work</tt> Factor subdirectory.</li>
+<li>Each vocabulary must explicitly reference any other vocabularies they rely on in their header.</li>
+<li>They may include words that are labeled private, but the user can still use these words
+by asking for the private word collection explicitly.</li>
+<li>With explicit referencing Factor vocabularies are only included and compiled when needed, allowing for
+exceptionaly compact deployed programs compared to some other languages.</li>
+</ul>
+<!-- End of Quotations -->
+
+<!-- Combinators -->
+<h2><hr align="left" width="40%">
+Classes
+<hr align="left" width="40%"></h2>
+Factor is a object-oriented language where every value is an instance of an object. Factor has three types of classes:
+<ul>
+<li><b><i>Primitive</i></b> classes are used for basic data, such as numbers, strings, and others. These classes
+may not be subclassed.</li>
+<li><b><i>Tuple</i></b> classes are more complicated classes that support instance variables.</li>
+<li><b><i>Derived</i></b> classes are classes that stem from a specific tuple class.
+Derived classes can be divided into smaller subgroups, such as <b><i>predicate</i></b>, 
+<b><i>union</i></b>, and <b><i>intersection</i></b> classes.</li>
+</ul>
+A unique result of Factor's object-oriented implementation is that classes do not own any intrinsic words.<br/>
+This means that objects are fully separated from the words that operate upon them and their variables.<br/>
+Instead, <b><i>generic words</i></b> are used. Generic words are defined to operate on a wide number of classes.<br/>
+New definitions for a new class are provided by the programmer. Generic words are thus comparable to template class functions in other languages like C++.
+<!-- End of Quotations -->
+
+<!-- Development Workflow -->
+<h2><hr align="left" width="40%">
+Development Workflow
+<hr align="left" width="40%"></h2>
+Factor programs are written and evaluated through an interactive development environment called the <b><i>Factor Listener</i></b>.
+<ul>
+<li>Source code and vocabularies are compiled into a program image.</li>
+<li>The running state of Factor can be saved into an image file and restored for easy access at a later time.</li>
+<li>This gives the language the performance benefits of compilation as well as some of the flexibility of an interpreted language.</li>
+<li>The <b><i>scaffold</i></b> vocabulary is available for easy generation of source code files. </li>
+<li>The documentation of Factor is built into the interface through a button on the Listener.</li>
+<li>Basic tools also exist for supplying new documentation for custom words, vocabularies, and classes from within the Listener.</li>
+</ul>
+<!-- End of Development Workflow -->
+
+<h2><hr align="left" width="40%"/>
+Useful Links & Resources
+<hr align="left" width="40%"/></h2>
+<ul>
+<li><a href="https://factorcode.org/">
+Official Factor Website</a></li>
+<li><a href="https://github.com/factor/factor">
+Factor Github Repository</a></li>
+<li><a href="http://www.concatenative.org/">
+Concatenative Programming Wiki</a></li>
+<li><a href="https://andreaferretti.github.io/factor-tutorial/">
+Factor Tutorial: From Function Composition to Distributed Programming</a>
+ by Andrea Ferretti.</li>
+</ul>
+
+<h2><hr align="left" width="40%"/>
+Exercises
+<hr align="left" width="40%"/></h2>
+
+The following are some programming exercises that incorporate some essential
+Factor concepts:
+
+<ul>
+
+<li> Define a word <tt>caesar</tt> in a vocabulary <tt>homework</tt> that
+takes a string of alphabetical characters and an integer and applies the
+integer to each character in the string.  Your solution must handle both
+positive and negative offset values. Only include uppercase and lowercase
+alphabetical characters in the output. For example, <tt>ABCD</tt> with an
+offset of 4 should produce <tt>EFGH</tt>. Factor your solution into a primary
+word <tt>caesar</tt> and set any helper words as private. This problem can be
+solved in less than 10 lines of code.
+
+<br/>
+<br/>
+Examples:
+<br/>
+
+<pre>
+> "SEESPOTRUN" 26 caesar .
+"seespotrun"
+
+> "SEESPOTRUN" -26 caesar .
+"seespotrun"
+
+> "ABCDEFG" 7 caesar .
+"HIJKLMN"
+</pre>
+</li>
+
+<li> Define a new tuple class <tt>novel</tt> that represents a fictional
+literary work.  Include member variables that correspond to the novel's title,
+author, genre, publisher, year of publication, and an identification number.
+Use strings for the first four variables and integers for the last pair.
+Include a constructor <tt><novel></tt> that takes values for each variable as
+arguments and sets them automatically. Also include a word <tt>book-print</tt>
+that takes a novel as an argument and prints the novel's details in the
+following simple format:
+
+<pre>
+Class: Novel
+Title: < title >
+Author: < author >
+Genre: < genre >
+Publisher: < publisher >
+Year: < year >
+ID: < number >
+</pre>
+
+Examples:
+<br/>
+
+<pre>
+> "Narnia" "C. S. Lewis" "Fantasy" "Harper-Collins" 1952 1 <novel>
+
+--- Data stack:
+T{ novel f "The Lion, the Witch, and the Wardrobe" "C. S. Lewis" "Fantasy" "Geoffrey Bles" 1950...
+
+> book-print
+Class: Novel
+Title: The Lion, the Witch, and the Wardrobe
+Author: C. S. Lewis
+Genre: Fantasy
+Publisher: Geoffrey Bles
+Year: 1950
+ID: 1
+</pre>
+</li>
+
+<li> Extend the solution to problem 2 to two new classes of books -
+<tt>textbook</tt> and <tt>article</tt>. For textbooks, change the 'genre'
+field to 'subject'. For article, change the 'genre' field to 'discipline' and
+add 'journal' and 'volume' fields.  Then, with the three classes, define a
+<tt>mixin</tt> class called <tt>library</tt> that will represent the union of
+different types of books. Adjust the <tt>book-print</tt> word from before to
+be generic with templates for each type of book. Publish the <tt>library</tt>
+and each class in a <tt>library</tt> vocabulary.
+
+<br/>
+<br/>
+Examples:
+<br/>
+
+<pre>
+> USE: library
+> "The C Programming Language" "Ritchie, D. and Kernighan, B." "Computer Science" "Prentice Hall" 1988 2 <textbook>
+
+--- Data stack:
+T{ textbook f "The C Programming Language"...
+
+> book-print
+Class: Novel
+Title: The C Programming Language
+Author: Ritchie, D. and Kernighan, B.
+Subject: Computer Science
+Publisher: Prentice Hall
+Year: 1988
+ID: 2
+
+> "Factor: A Dynamic Stack-based Programming Language" "Pestov, S." "Computer Science" "ACM SIGPLAN Notices" 45 "ACM Press" 2010 3 <article>
+
+--- Data stack:
+T{ article f...
+
+> book-print
+Class: Novel
+Title: Factor: A Dynamic Stack-based Programming Language
+Author: Pestov, S.
+Discipline: Computer Science
+Journal: ACM SIGPLAN Notices
+Volume: 45
+Publisher: ACM Press
+Year: 2010
+ID: 3
+</pre>
+</li>
+
+</ul>
+
+<!-- References Section Starts Here -->
+<!------------------------------------>
+<!------------------------------------>
+<!------------------------------------>
+<h2><hr align="left" width="40%"/>References</h2>
+<ul>
+<table>
+
+<!-- Reference #3 -->
+<tr>
+<td valign="top">[ABIF]</td>
+<td>P. Koopman. 1993.
+<a href="http://dl.acm.org/citation.cfm?doid=154766.155395">
+A brief introduction to Forth.</a>.
+In <i>Proceedings of the Second
+ACM SIGPLAN Conference on History of Programming Languages</i>. ACM Press,
+New York, NY, 357-358. Also appears in <i>ACM SIGPLAN Notices</i>, 28(3), 1993.
+</td>
+</tr>
+
+<!-- Reference #2 -->
+<tr>
+<td valign="top">[CPLW]</td>
+<td>Concatenative Language. Available: 
+<a href="http://concatenative.org/wiki/view/Concatenative%20language">
+http://concatenative.org/wiki/view/Concatenative%20language</a>.
+[Last accessed: 24 March 2017]
+</td>
+</tr>
+
+<!-- Reference #1 -->
+<tr>
+<td valign="top">[FDSL]</td>
+<td>S. Pestov, D. Ehrenberg, and J. Groff.
+<a href="http://factorcode.org/littledan/dls.pdf">Factor: A Dynamic Stack-based
+Programming Language</a>.
+<!--<i>"Factor: A Dynamic Stack-based Programming Language."</i>.-->
+In <i>Proceedings of the Sixth Symposium on Dynamic
+Languages</i>. ACM Press, New York, NY, 43-58. Also appears in
+<i>ACM SIGPLAN Notices</i>, 45(12), 2010.</td>
+</tr>
+
+</table>
+</ul>
+<!-- References Section Ends Here -->
+
+<hr align="center" width="80%" size="10"/>
+<a href="index.html"><img src="http://academic.udayton.edu/SaverioPerugini/images/rh.jpg" alt="Return Home" border="0"/></a>
+</td>
+</tr>
+</table>
+</body>
+</html>
