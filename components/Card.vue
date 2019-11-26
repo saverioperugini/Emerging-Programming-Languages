@@ -6,17 +6,13 @@
 					{{ title }}
 				</p>
 				<a class="has-text-grey" target="_blank" :href="'https://github.com/saverioperugini/Emerging-Languages-Spring-2017/tree/master/static/' + title">
-					<b-icon icon="code-not-equal-variant" type="is-large"></b-icon>
+					<b-icon icon="code-not-equal-variant" type="is-large"/>
 				</a>
 			</header>
 			<div class="card-content">
-				<div class="content has-text-centered" style="height: 15vw; text-align: center">
+				<div class="content has-text-centered" style="height: 15vw; line-height: 15vw">
 					<img v-if="icon" :src="icon" :alt="title + ' logo'">
-					<b-icon
-							v-else
-							icon="code-braces"
-							size="is-large"
-							type="is-black"></b-icon>
+					<span v-else style="font-size: 10rem; font-weight: bold;" class="has-text-black">{{ title[0] }}</span>
 				</div>
 			</div>
 			<footer class="card-footer">

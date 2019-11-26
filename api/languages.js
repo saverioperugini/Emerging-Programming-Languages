@@ -48,7 +48,8 @@ app.get("/", function(req, res) {
             synopsis: {
               modal: false,
               path: ''
-            }
+            },
+            presentation: false
           };
 
           if(item.includes("html")) {
