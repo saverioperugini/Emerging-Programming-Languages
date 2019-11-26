@@ -3,10 +3,10 @@
 		<div class="columns is-mobile" v-for="chunk in chunkLangs" :key="chunk">
 			<Card :title="lang.language" v-bind:icon="logos[lang.language]" class="column is-one-third" v-for="lang in chunk" :key="lang">
 				<div style="display: flex; flex-direction: column; justify-content: center; padding: 0">
-					<b-button v-if="lang.presentation" class="button" type="is-primary" style="margin-bottom: 5px" @click="lang.presentation.modal=true">Presentation</b-button>
-					<b-button v-if="lang.reference" class="button" type="is-primary" style="margin-bottom: 5px" @click="lang.reference.modal=true">Reference </b-button>
-					<b-button v-if="lang.synopsis" class="button" type="is-primary" style="margin-bottom: 5px" @click="lang.synopsis.modal=true">Synopsis</b-button>
-					<b-button v-if="lang.notes" class="button" type="is-primary" style="margin-bottom: 5px" @click="lang.notes.modal=true">Notes</b-button>
+<!--					<b-button v-if="lang.presentation != null" class="button" type="is-primary" style="margin-bottom: 5px" @click="lang.presentation.modal=true">Presentation</b-button>-->
+					<b-button v-if="lang.reference != null" class="button" type="is-primary" style="margin-bottom: 5px" @click="lang.reference.modal=true">Reference </b-button>
+					<b-button v-if="lang.synopsis != null" class="button" type="is-primary" style="margin-bottom: 5px" @click="lang.synopsis.modal=true">Synopsis</b-button>
+					<b-button v-if="lang.notes != null" class="button" type="is-primary" style="margin-bottom: 5px" @click="lang.notes.modal=true">Notes</b-button>
 				</div>
 				<!--<b-modal :active.sync="lang.presentation.modal" :width="980" :height="640">
 					<div class="card" style="height: 640px; overflow-y: hidden; padding: 0">
