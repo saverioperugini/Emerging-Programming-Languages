@@ -3,46 +3,46 @@
 		<div class="columns is-mobile" v-for="chunk in chunkLangs" :key="chunk">
 			<Card :title="lang.language" v-bind:icon="logos[lang.language]" class="column is-one-third" v-for="lang in chunk" :key="lang">
 				
+					<b-button v-if="lang.language in presentations" class="button" type="is-primary" style="margin-bottom: 5px" @click="lang.presentation=true">Presentation</b-button>
 				<b-button v-if="lang.notes.path !== ''" class="button" type="is-primary" style="margin-bottom: 5px" @click="lang.notes.modal=true">Notes</b-button>
-				<b-button v-if="lang.language in presentations" class="button" type="is-primary" style="margin-bottom: 5px" @click="lang.presentation=true">Presentation</b-button>
 				<b-button v-if="lang.synopsis.path !== ''" class="button" type="is-primary" style="margin-bottom: 5px" @click="lang.synopsis.modal=true">Synopsis</b-button>
 				<b-button v-if="lang.reference.path !== ''" class="button" type="is-primary" style="margin-bottom: 5px" @click="lang.reference.modal=true">Reference </b-button>
 				
-				<b-modal :active.sync="lang.presentation" :width="980" :height="640">
-					<div class="card" style="height: 640px; overflow-y: hidden; padding: 0">
+				<b-modal :active.sync="lang.presentation" height="95vh"  width="95vw">
+					<div class="card" style="height: 95vh; width: 95vw; overflow-y: hidden; padding: 0">
 						<div class="card-content" style="padding: 0">
 							<div class="content">
-								<iframe :src="presentations[lang.language]" width="980" style="height: 640px" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+								<iframe :src="presentations[lang.language]" style="height: 95vh; width: 95vw"> allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 							</div>
 						</div>
 					</div>
 				</b-modal>
 				
-				<b-modal :active.sync="lang.reference.modal" :width="980" :height="640">
-					<div class="card" style="height: 640px; overflow-y: hidden; padding: 0">
+				<b-modal :active.sync="lang.reference.modal" height="95vh"  width="50vw">
+					<div class="card" style="height: 95vh; width: 50vw; overflow-y: hidden; padding: 0">
 						<div class="card-content" style="padding: 0">
 							<div class="content">
-								<iframe :src="lang.reference.path" width="980" style="height: 640px"></iframe>
+								<iframe :src="lang.reference.path" style="height: 95vh; width: 50vw"></iframe>
 							</div>
 						</div>
 					</div>
 				</b-modal>
 				
-				<b-modal :active.sync="lang.synopsis.modal" :width="980" :height="640">
-					<div class="card" style="height: 640px; overflow-y: hidden; padding: 0">
+				<b-modal :active.sync="lang.synopsis.modal" height="95vh"  width="50vw">
+					<div class="card" style="height: 95vh; width: 50vw; overflow-y: hidden; padding: 0">
 						<div class="card-content" style="padding: 0">
 							<div class="content">
-								<iframe :src="lang.synopsis.path" width="980" style="height: 640px"></iframe>
+								<iframe :src="lang.synopsis.path" style="height: 95vh; width: 50vw"></iframe>
 							</div>
 						</div>
 					</div>
 				</b-modal>
 				
-				<b-modal :active.sync="lang.notes.modal" :width="980" :height="640">
-					<div class="card" style="height: 640px; overflow-y: hidden; padding: 0">
+				<b-modal :active.sync="lang.notes.modal" height="95vh"  width="80vw">
+					<div class="card" style="height: 95vh; width: 80vw; overflow-y: hidden; padding: 0">
 						<div class="card-content" style="padding: 0">
 							<div class="content">
-								<iframe :src="lang.notes.path" width="980" style="height: 640px"></iframe>
+								<iframe :src="lang.notes.path" style="height: 95vh; width: 80vw"></iframe>
 							</div>
 						</div>
 					</div>
