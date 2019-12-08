@@ -1,0 +1,620 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Introduction to Kotlin</title>
+	<link rel="stylesheet" type="text/css" href="pl.css"/>
+	<link rel="Shortcut Icon" href="https://kotlinlang.org/assets/images/favicon.ico" type="image/x-icon">
+</head>
+<body>
+<header>
+	Introduction to the Kotlin Programming Language
+</header>
+<article>
+	<div class="subheader">Key Language Concepts in Kotlin</div>
+	
+	<ul>
+		
+		<li>
+			Originally written in Java
+			<ul>
+				<li>Matured enough that it is now 85% bootstrapped</li>
+				<li>Built by JetBrains to address the fact that no single language had all the features they wanted and compiled quickly</li>
+				<li>Runs on the JVM and is fully interoperable with Java</li>
+				<li>Focused on Android and now the exclusive official language of the platform</li>
+			</ul>
+		</li>
+		<li>Static Typing</li>
+		<li>Variables declared with <code>val</code>, <code>var</code> and typed with Properties</li>
+		<li>Everything is an Object</li>
+		<li>Null Safety</li>
+		<li>First-Class Functions</li>
+		<li>Reflection</li>
+	</ul>
+	
+	<div class="subheader">Core Kotlin</div>
+	
+	<ul>
+		<li>
+			Variable Declaration
+			<ul>
+				<li>Kotlin only has two keywords for declaring a variable, denoting its mutability</li>
+				<li><code>var</code> or variable, is the stereotypical variable declaration type</li>
+				<li><code>val</code> or value, is a variable whose value cannot be changed, similar to Java's <code>final</code></li>
+				<li>Types can be specified with a property, or the interpreter will infer it</li>
+			</ul>
+		</li>
+		<li>
+			Properties
+			<ul>
+				<li>Variable types can be declared with the property operator <code>:</code></li>
+				<li>Type property is required when variable is not initialized</li>
+				<li>Variables can have a getter and setter properties as well<br/>
+					<code class="code-block">
+						|var onlyMoreThan5: Int = 6<br/>
+						|\tset(value) {<br/>
+						|\t\tif (value > 5) field = value<br/>
+						|\t}
+					</code>
+				</li>
+			</ul>
+		</li>
+		<li>Null Safety
+			<ul>
+				<li>Variables cannot be null by default</li>
+				<li>Appending the type Property with <code>?</code> makes the variable nullable (<code>Int?</code>)</li>
+				<li>Nullable variables can be null checked with a number of operators: <code>?, ?:, !!</code></li>
+				<li>Non-nullable variables can be cast to a nullable type using <code>as?</code></li>
+			</ul>
+		</li>
+		<li>Lambdas, Inline Functions, &amp; Anonymous Functions
+			<ul>
+				<li>The below functions are effectively equivalent and both acceptable lambdas Kotlin<br/>
+					<code class="code-block">
+						|val concat: (String, String) -> String {a: String, b: String -> a + b}<br/>
+						|val concat = {a, b -> a + b}
+					</code>
+				</li>
+			</ul>
+		</li>
+		<li>Extension Functions
+			<ul>
+				<li>Classes created with the keyword <code>open</code> can have functions created outside of their class similar to JavaScript prototypes<br/>
+					<code class="code-block">
+						|open class Truck(var wheelCount: Int) {<br/>
+						|\tfun getNumOfWheels(): Int {<br/>
+						|\t\treturn this.wheelCount<br/>
+						|\t}<br/>
+						|}<br/>
+						|<br/>
+						|var pickup = Truck(4)<br/>
+						|<br/>
+						|print(pickup.getNumOfWheels()) // Prints 4<br/>
+						|<br/>
+						|fun Truck.changeWheelCount(newWheelCount: Int) {<br/>
+						|\tthis.wheelCount = newWheelCount<br/>
+						|}<br/>
+						|<br/>
+						|pickup.changeWheelCount(6)<br/>
+						|<br/>
+						|print(pickup.getNumOfWheels()) // Prints 6
+					</code>
+				</li>
+			</ul>
+		</li>
+		<li>String Interpolation
+			<ul>
+				<li>Variables can called directly from within strings using the <code>$</code> operator</li>
+				<li>Expressions can also be evaluated in strings when wrapped in curly braces<br/>
+					<code class="code-block">
+						|val x = 6<br/>
+						|println("x is $x") // Prints x is 6<br/>
+						|println("(x + 1) is ${x + 1}") // Prints (x + 1) is 7
+					</code>
+				</li>
+			</ul>
+		</li>
+		<li>Singletons
+			<ul>
+				<li>Single instance objects allows for more lightweight objects when you will only ever use one</li>
+			</ul>
+		</li>
+		<li>Range expression
+			<ul>
+				<li>Kotlin allows for loop simplification using the <code>..</code> operator</li>
+				<li>The range operator will start at the first value, and run up to and including the end value</li>
+			</ul>
+		</li>
+		<li>Operator Overloading
+			<ul>
+				<li>All built-in operators can be overloaded in order to customize all type to the exact specifications necessary for your program</li>
+			</ul>
+		</li>
+		<li>Data Classes
+			<ul>
+				<li>Objects which hold exclusively data, no member functions</li>
+				<li>Built on the same reasoning of Singletons</li>
+			</ul>
+		</li>
+		<li>Coroutines
+			<ul>
+				<li>Asynchronous light-weight threads</li>
+				<li>Allow for channels for the Coroutines to communicate</li>
+			</ul>
+		</li>
+	</ul>
+	
+	<div class="subheader">Null Safety</div>
+	
+	<ul>
+		<li>Kotlin attempts to remove all the problems Java code can run into</li>
+		<li>Variables must be declared as nullable with the <code>?</code> operator<br/>
+			<code>val x: String? = null<br/></code>
+		</li>
+		<li>Null Check Operators
+			<ul>
+				<li>
+					Nullable variables can then be null checked in multiple ways<br/>
+					<code class="code-block">
+						|// No null check<br/>
+						|println(x.length) // Throws an Error<br/>
+						|// Allow null<br/>
+						|println(x?.length) // Prints null<br/>
+						|// If null<br/>
+						|println(x?.length ?: -1) // Prints -1<br/>
+						|// Assert not null
+						|println(x!!.length) // Throws an Error
+					</code>
+				</li>
+			</ul>
+		</li>
+		<li>Safe Casting
+			<ul>
+				<li>
+					Non-nullable variables can be cast to nullable types using <code>as?</code><br/>
+					<code class="code-block">
+						|val y: Int = 6<br/>
+						|val z: Int? = y as? Int
+					</code>
+				</li>
+			</ul>
+		</li>
+		<li>Collections of Nullable Types
+			<ul>
+				<li>
+					Collections can also be created using nullable types and null variables can be filtered out with built-in function<br/>
+					<code class="code-block">
+						|val nullableList: List&lt;Int?&gt; = listOf(1, 2, null, 4)<br/>
+						|val intList: List&lt;Int&gt; = nullableList.filterNotNull()
+					</code>
+				</li>
+			</ul>
+		</li>
+	</ul>
+	
+	<div class="subheader">Ranges</div>
+	
+	<ul>
+		<li>Kotlin makes for loops easier than Java and even Python with the range operator <code>..</code></li>
+		<li>The range operator will start at the first value, and increment up to and including the end value<br/>
+			<code>for (i in 1..4) print(i) //Prints 1234</code>
+		</li>
+		<li>If you do not wish to include the end value, swap <code>..</code> for <code>until</code></li>
+		<li>For ranges in reverse order, use the <code>downTo</code></li>
+		<li>To alter</li>
+	</ul>
+	
+	<div class="subheader">Operator Overloading</div>
+	
+	<ul>
+		<li>Kotlin allows for nearly all built-in operators to be overloaded and customized to the need of the program</li>
+		<li>This allows not only for custom operators for written classes, but using extension functions operators of built-in functions can be overloaded too</li>
+		<li>As a result, classes can be written to overload operators and build much more concise code than would be found in languages like Java<br/>
+			<code class="code-block">
+				|class Str(var data: String) {<br/>
+				|\toperator fun divAssign(i: Int) {<br/>
+				|\t\tdata = data.substring(0..i)<br/>
+				|\t}<br/>
+				|}<br/>
+				|<br/>
+				|var helloWorld = Str("Hello, World!")<br/>
+				|helloWorld /= 4<br/>
+				|print(helloWorld.data) // Prints Hello
+			</code>
+		</li>
+		<li>All of the following operators can be overloaded and use the corresponding function<br/><br/>
+			<table style="border-collapse: collapse; border: 1px solid black">
+				<thead>
+					<tr style="border-top: solid 1px black; border-bottom: solid 1px black;">
+						<th>Expression</th>
+						<th>Evaluated as</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td><code>+a</code></td>
+						<td><code>a.unaryPlus()</code></td>
+					</tr>
+					<tr>
+						<td><code>-a</code></td>
+						<td><code>a.unaryMinus()</code></td>
+					</tr>
+					<tr>
+						<td><code>!a</code></td>
+						<td><code>a.not()</code></td>
+					</tr>
+					<tr>
+						<td><code>a++</code></td>
+						<td><code>a.inc()</code></td>
+					</tr>
+					<tr>
+						<td><code>a--</code></td>
+						<td><code>a.dec()</code></td>
+					</tr>
+					<tr>
+						<td><code>a + b</code></td>
+						<td><code>a.plus(b)</code></td>
+					</tr>
+					<tr>
+						<td><code>a - b</code></td>
+						<td><code>a.minus(b)</code></td>
+					</tr>
+					<tr>
+						<td><code>a * b</code></td>
+						<td><code>a.times(b)</code></td>
+					</tr>
+					<tr>
+						<td><code>a / b</code></td>
+						<td><code>a.div(b)</code></td>
+					</tr>
+					<tr>
+						<td><code>a..b </code></td>
+						<td><code>a.rangeTo(b)</code></td>
+					</tr>
+					<tr>
+						<td><code>a in b</code></td>
+						<td><code>b.contains(a)</code></td>
+					</tr>
+					<tr>
+						<td><code>a !in b</code></td>
+						<td><code>!b.contains(a)</code></td>
+					</tr>
+					<tr>
+						<td><code>a[i]</code></td>
+						<td><code>a.get(i)</code></td>
+					</tr>
+					<tr>
+						<td><code>a[i, j]</code></td>
+						<td><code>a.get(i, j)</code></td>
+					</tr>
+					<tr>
+						<td><code>a[i_1, ..., i_n]</code></td>
+						<td><code>a.get(i_1, ..., i_n)</code></td>
+					</tr>
+					<tr>
+						<td><code>a[i] = b</code></td>
+						<td><code>a.set(i, b)</code></td>
+					</tr>
+					<tr>
+						<td><code>a[i, j] = b</code></td>
+						<td><code>a.set(i, j, b)</code></td>
+					</tr>
+					<tr>
+						<td><code>a[i_1, ..., i_n] = b</code></td>
+						<td><code>a.set(i_1, ..., i_n, b)</code></td>
+					</tr>
+					<tr>
+						<td><code>a()</code></td>
+						<td><code>a.invoke()</code></td>
+					</tr>
+					<tr>
+						<td><code>a(i)</code></td>
+						<td><code>a.invoke(i)</code></td>
+					</tr>
+					<tr>
+						<td><code>a(i, j)</code></td>
+						<td><code>a.invoke(i, j)</code></td>
+					</tr>
+					<tr>
+						<td><code>a(i_1, ..., i_n)</code></td>
+						<td><code>a.invoke(i_1, ..., i_n)</code></td>
+					</tr>
+					<tr>
+						<td><code>a += b</code></td>
+						<td><code>a.plusAssign(b)</code></td>
+					</tr>
+					<tr>
+						<td><code>a -= b</code></td>
+						<td><code>a.minusAssign(b)</code></td>
+					</tr>
+					<tr>
+						<td><code>a *= b</code></td>
+						<td><code>a.timesAssign(b)</code></td>
+					</tr>
+					<tr>
+						<td><code>a /= b</code></td>
+						<td><code>a.divAssign(b)</code></td>
+					</tr>
+					<tr>
+						<td><code>a == b</code></td>
+						<td><code>a?.equals(b) ?: (b === null)</code></td>
+					</tr>
+					<tr>
+						<td><code>a != b</code></td>
+						<td><code>!(a?.equals(b) ?: (b === null))</code></td>
+					</tr>
+					<tr>
+						<td><code>a &gt; b</code></td>
+						<td><code>a.compareTo(b) &gt; 0</code></td>
+					</tr>
+					<tr>
+						<td><code>a &lt; b</code></td>
+						<td><code>a.compareTo(b) &lt; 0</code></td>
+					</tr>
+					<tr>
+						<td><code>a &gt;= b</code></td>
+						<td><code>a.compareTo(b) &gt;= 0</code></td>
+					</tr>
+					<tr>
+						<td><code>a &lt;= b</code></td>
+						<td><code>a.compareTo(b) &lt;= 0</code></td>
+					</tr>
+				</tbody>
+			</table>
+		</li>
+	</ul>
+	
+	<div class="subheader">Java Interoperability</div>
+	
+	<ul>
+		<li>Kotlin converts Java getter and setter (determined by number of parameters and identifier prefixes) are converted to get and set properties</li>
+		<li>Kotlin keywords that Java does not share, such as <code>in</code>, <code>is</code>, and <code>object</code>, need to be escaped in backticks: <code>foo.`is`(bar)</code>
+		</li>
+		<li>Platform Types
+			<ul>
+				<li>Because Java allows any reference to be null, null-safety must be relaxed slightly</li>
+				<li>The compiler will allow non-safe calls to be made, and for possibly null Java references to ne assigned ot non-null Kotlin variables, but they run the risk of failing at runtime</li>
+			</ul>
+		</li>
+		<li>As long as these rules are followed, nearly all Java code can be called from Kotlin</li>
+	</ul>
+	
+	<div class="subheader">Homework</div>
+	
+	<p>
+		Using the skeleton code below, complete the Database and UnqTable class (without editing the Table class or main function), to produce the following output:
+		<code class="code-block">
+			|Line 14:<br/>
+			|[Sports, NBA Teams]<br/>
+			|<br/>
+			|Line 16:<br/>
+			|| City            | Team<br/>
+			|==============================<br/>
+			|| Detroit         | Pistons<br/>
+			|| Oklahoma City   | Thunder<br/>
+			|| Boston          | Celtics<br/>
+			|<br/>
+			|Line 28:<br/>
+			|[Types of Cars, Licensed Vehicles]<br/>
+			|<br/>
+			|Line 29:<br/>
+			|Car with License Plate '56TZ78' is a: Ford Mustang<br/>
+			|<br/>
+			|Line 30:<br/>
+			|Car with License Plate '6THJ89' is a: Unknown Make Unknown Model<br/>
+			|<br/>
+			|Line 33:<br/>
+			|There are 2 database(s)
+		</code>
+	</p>
+	<h3>Skeleton Code</h3>
+	<p>
+		<code class="code-block">
+			|fun main() {<br/>
+			|\tval sports = Table("Sports", "Team", "City", "Game")<br/>
+			|\tval basketball = UnqTable("NBA Teams", "City", "Team")<br/>
+			|\t<br/>
+			|\tval sportsDB = Database("Sports Database")<br/>
+			|\tsportsDB += sports<br/>
+			|\tsportsDB += basketball<br/>
+			|\t<br/>
+			|\tbasketball.addRow("Detroit", "Pistons")<br/>
+			|\tbasketball.addRow("Oklahoma City", "Thunder")<br/>
+			|\tbasketball.addRow("Oklahoma City", "Lightning")<br/>
+			|\tbasketball.addRow("Boston", "Celtics")<br/>
+			|\t<br/>
+			|\tprintln("Line 14:\n${sportsDB.tableNames()}\n")<br/>
+			|\tprintln("Line 16:")<br/>
+			|\tbasketball.display(15)<br/>
+			|\t<br/>
+			|\t<br/>
+			|\tval cars = UnqTable("Licensed Vehicles", "License Plate", "Make", "Model")<br/>
+			|\tval carTypes = UnqTable("Types of Cars", "Make", "Model", "Year")<br/>
+			|\t<br/>
+			|\tval automobileDB = Database("Automobiles", carTypes, cars)<br/>
+			|\t<br/>
+			|\tcars.addRow("8UJY76", "Jeep", "Cherokee")<br/>
+			|\tcars.addRow("56TZ78", "Ford", "Mustang")<br/>
+			|\tcars.addRow("1QSFI0", "Toyota", "Outback")<br/>
+			|\tcars.addRow("6THJ89", null, null)<br/>
+			|\t<br/>
+			|\tprintln("\nLine 28:\n${automobileDB.tableNames()}\n")<br/>
+			|\tprintln("Line 29:\nCar with License Plate '56TZ78' is a: ${cars["56TZ78"]}\n")<br/>
+			|\tprintln("Line 30:\nCar with License Plate '6THJ89' is a: ${cars["6THJ89"]}\n")<br/>
+			|\t<br/>
+			|\tprintln("Line 33:\nThere are ${Database.numOfDatabases} database(s)")<br/>
+			|}<br/>
+			|<br/>
+			|class Database {<br/>
+			|\t// TODO: Complete Database Class<br/>
+			|}<br/>
+			|<br/>
+			|open class Table(val title: String, vararg cols:String) {<br/>
+			|\tprivate val columnTitles = cols<br/>
+			|\tprotected val numOfColumns = cols.size<br/>
+			|\tprotected var numOfRows = 0<br/>
+			|\tvar data: MutableList&lt;List&lt;String?&gt;&gt; = ArrayList()<br/>
+			|\t<br/>
+			|\topen fun addRow(vararg input:String?):Boolean {<br/>
+			|\t\tif (input.size != this.numOfColumns) return false<br/>
+			|\t<br/>
+			|\t\treturn this.data.add(listOf(*input))<br/>
+			|\t}<br/>
+			|\t<br/>
+			|\tfun display(colSize:Int = 10) {<br/>
+			|\t\tfor (title in columnTitles) print("| %-${colSize}s ".format(title))<br/>
+			|\t<br/>
+			|\t\tprintln("\n${"=".repeat(colSize * numOfColumns)}")<br/>
+			|\t<br/>
+			|\t\tfor (row in data) {<br/>
+			|\t\t\tfor (col in row) print("| %-${colSize}s ".format(col!!))<br/>
+			|\t\t\tprintln()<br/>
+			|\t\t}<br/>
+			|\t}<br/>
+			|}<br/>
+			|<br/>
+			|class UnqTable(title:String, vararg cols:String): Table(title, *cols) {<br/>
+			|\t// TODO: Complete UnqTable Class<br/>
+			|}			<br/>
+		</code>
+	</p>
+	
+	<div class="subheader">Concepts Table</div>
+	
+	<table>
+		<tbody>
+		<tr>
+			<td>First-Class Functions</td>
+			<td><label><input type="checkbox" onclick="checkboxOnClick(this);" class="checked"></label></td>
+		</tr>
+		<tr>
+			<td>λ Expressions</td>
+			<td><label><input type="checkbox" onclick="checkboxOnClick(this);" class="checked"></label></td>
+		</tr>
+		<tr>
+			<td>Higher-Order Functions</td>
+			<td><label><input type="checkbox" onclick="checkboxOnClick(this);" class="checked"></label></td>
+		</tr>
+		<tr>
+			<td>First-Class Closures</td>
+			<td><label><input type="checkbox" onclick="checkboxOnClick(this);" class="checked"></label></td>
+		</tr>
+		<tr>
+			<td>Currying</td>
+			<td><label><input type="checkbox" onclick="checkboxOnClick(this);" class="checked"></label></td>
+		</tr>
+		<tr>
+			<td>Continuation-Passing Style</td>
+			<td><label><input type="checkbox" onclick="checkboxOnClick(this);" class="checked"></label></td>
+		</tr>
+		<tr>
+			<td>First-Class Continuations</td>
+			<td><label><input type="checkbox" onclick="checkboxOnClick(this);" class="indeterminate"></label></td>
+		</tr>
+		<tr>
+			<td>Pattern Matching</td>
+			<td><label><input type="checkbox" onclick="checkboxOnClick(this);" class="unchecked"></label></td>
+		</tr>
+		<tr>
+			<td>Strong Typing</td>
+			<td><label><input type="checkbox" onclick="checkboxOnClick(this);" class="checked"></label></td>
+		</tr>
+		<tr>
+			<td>Type Systems</td>
+			<td><label><input type="checkbox" onclick="checkboxOnClick(this);" class="checked"></label></td>
+		</tr>
+		<tr>
+			<td>Lazy Evaluation</td>
+			<td><label><input type="checkbox" onclick="checkboxOnClick(this);" class="checked"></label></td>
+		</tr>
+		<tr>
+			<td>List/Generator Comprehension</td>
+			<td><label><input type="checkbox" onclick="checkboxOnClick(this);" class="checked"></label></td>
+		</tr>
+		<tr>
+			<td>Message Passing</td>
+			<td><label><input type="checkbox" onclick="checkboxOnClick(this);" class="checked"></label></td>
+		</tr>
+		<tr>
+			<td>Actor Model of Concurrency</td>
+			<td><label><input type="checkbox" onclick="checkboxOnClick(this);" class="checked"></label></td>
+		</tr>
+		<tr>
+			<td>Coroutines</td>
+			<td><label><input type="checkbox" onclick="checkboxOnClick(this);" class="checked"></label></td>
+		</tr>
+		<tr>
+			<td>Channels</td>
+			<td><label><input type="checkbox" onclick="checkboxOnClick(this);" class="checked"></label></td>
+		</tr>
+		<tr>
+			<td>Communicating Sequential Processes</td>
+			<td><label><input type="checkbox" onclick="checkboxOnClick(this);" class="checked"></label></td>
+		</tr>
+		<tr>
+			<td>Homoiconic</td>
+			<td><label><input type="checkbox" onclick="checkboxOnClick(this);" class="unchecked"></label></td>
+		</tr>
+		<tr>
+			<td>Concurrency</td>
+			<td><label><input type="checkbox" onclick="checkboxOnClick(this);" class="checked"></label></td>
+		</tr>
+		<tr>
+			<td>Callbacks</td>
+			<td><label><input type="checkbox" onclick="checkboxOnClick(this);" class="checked"></label></td>
+		</tr>
+		<tr>
+			<td>Type Inference</td>
+			<td><label><input type="checkbox" onclick="checkboxOnClick(this);" class="checked"></label></td>
+		</tr>
+		<tr>
+			<td>Dynamic Dispatch</td>
+			<td><label><input type="checkbox" onclick="checkboxOnClick(this);" class="unchecked"></label></td>
+		</tr>
+		<tr>
+			<td>Dynamic Typing</td>
+			<td><label><input type="checkbox" onclick="checkboxOnClick(this);" class="unchecked"></label></td>
+		</tr>
+		<tr>
+			<td>Heterogeneous Lists</td>
+			<td><label><input type="checkbox" onclick="checkboxOnClick(this);" class="unchecked"></label></td>
+		</tr>
+		</tbody>
+		
+		<script>
+			let checks = document.getElementsByClassName("checked");
+			let lines = document.getElementsByClassName("indeterminate");
+			
+			for (let i = 0; i < checks.length; i++) checks[i].checked = true;
+			
+			for (let i = 0; i < lines.length; i++) lines[i].indeterminate = true;
+			
+			function checkboxOnClick(self) {
+				switch (self.classList[0]) {
+					case "checked":
+						self.checked = true;
+						break;
+					case "indeterminate":
+						self.indeterminate = true;
+						break;
+					default:
+						self.checked = false;
+				}
+			}
+		</script>
+	</table>
+	
+	<div class="subheader">References</div>
+	<p>JetBrains. Learn Kotlin. Retrieved October 18, 2019, from <a href="https://kotlinlang.org/docs/reference/" target="_blank">https://kotlinlang.org/docs/reference/</a>.</p>
+	
+	<hr noshade size=“2” width=“75%”>
+	<br/>
+	<span size=“1” face=“Verdana, Helvetica, sans-serif, Times”>
+		&copy; J.T. Schwartz, Fall 2019, University of Dayton.
+		Permission to use ideas about the organization of topics and any notes or material is granted, provided suitable acknowledgments and citations are made.
+	</span>
+</article>
+
+<script src="pl.js"></script>
+</body>
+</html>

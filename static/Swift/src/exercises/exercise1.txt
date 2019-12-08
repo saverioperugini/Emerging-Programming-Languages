@@ -1,0 +1,8 @@
+Create a multiply partial function application similar to the addition created in class. The partial application function should be of type ((Int) -> (Int) -> Int).Type. Use this function to create a "times 5" function that allows for the input of one integer and multiplies it by 5.
+
+func mult(a: Int) -> (Int) -> Int {
+    return { b in a * b }
+}
+
+let multFive = mult(a: 5)
+let ans = multFive(10)
