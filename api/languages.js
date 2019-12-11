@@ -102,7 +102,7 @@ app.get("/finals", function(req, res) {
 						finalsObj[i].paper.path = parts.slice(1).join("/")
 					} else if(parts.includes('presentation')) {
 						finalsObj[i].slides.path = parts.slice(1).join("/")
-					} else if(item.includes('html')) {
+					} else if(item.includes('html') && !item.includes('src')) {
 						finalsObj[i].abstract = parts.slice(1).join("/")
 					}
 					
@@ -126,7 +126,7 @@ app.get("/finals", function(req, res) {
 						final.paper.path = parts.slice(1).join("/")
 					} else if(parts.includes('presentation')) {
 						final.slides.path = parts.slice(1).join("/")
-					} else if(item.includes('html')) {
+					} else if(item.includes('html') && !item.includes('src')) {
 						final.abstract = parts.slice(1).join("/")
 					}
 					
