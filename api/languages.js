@@ -1,7 +1,6 @@
 let recursive = require("recursive-readdir");
 let express = require("express");
 let fs = require('fs');
-let sys = require('sys');
 let app = express();
 
 function getIndex(key, array) {

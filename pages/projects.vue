@@ -60,7 +60,7 @@
 			Card
 		},
 		created() {
-			this.$axios.$get("http://localhost:3000/languages/finals")
+			this.$axios.$get(window.location.origin + "/languages/finals")
 				.then(res => {
 					console.log(res);
 					this.finals = res;

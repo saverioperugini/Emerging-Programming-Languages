@@ -80,14 +80,12 @@
 		computed: {
 			chunkLangs() {
 				let x = _.chunk(this.languages, 3);
-				console.log(x);
 				return x
 			}
 		},
 		mounted() {
-			this.$axios.$get("http://localhost:3000/languages")
+			this.$axios.$get(window.location.origin + "/languages")
 				.then(res => {
-					console.log(res);
 					this.languages = res;
 				})
 		},
