@@ -1,5 +1,7 @@
 let recursive = require("recursive-readdir");
 let express = require("express");
+let fs = require('fs');
+let sys = require('sys');
 let app = express();
 
 function getIndex(key, array) {
@@ -103,7 +105,7 @@ app.get("/finals", function(req, res) {
 					} else if(parts.includes('presentation')) {
 						finalsObj[i].slides.path = parts.slice(1).join("/")
 					} else if(item.includes('html') && !item.includes('src')) {
-						finalsObj[i].abstract = parts.slice(1).join("/")
+						finalsObj[i].abstract = fs.readFileSync(item, "utf8");
 					}
 					
 				} else {
@@ -127,7 +129,7 @@ app.get("/finals", function(req, res) {
 					} else if(parts.includes('presentation')) {
 						final.slides.path = parts.slice(1).join("/")
 					} else if(item.includes('html') && !item.includes('src')) {
-						final.abstract = parts.slice(1).join("/")
+						final.abstract = fs.readFileSync(item, "utf8");
 					}
 					
 					finalsObj.push(final);
