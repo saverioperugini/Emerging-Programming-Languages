@@ -3,48 +3,50 @@
 		<div class="columns is-mobile" v-for="project in finals" :key="project">
 			<div class="card">
 				<header class="card-header">
-					<p class="card-header-title is-size-5 has-text-grey">
-						{{ fullNames[project.final] }}<br/>
-						{{ titles[project.final] }}
+					<p class="card-header-title has-text-grey" style="display: -webkit-box">
+						<span class=" is-size-3">{{ titles[project.final] }}</span><br/>
+						<span class="is-size-4">{{ fullNames[project.final] }}</span>
 					</p>
 				</header>
 				<div class="card-content">
 					{{ abstracts[project.final] }}
 				</div>
-				<footer>
-					<b-button v-if="project.language in presentations" class="button" type="is-primary" style="margin-bottom: 5px" @click="project.presentation=true">YouTube</b-button>
-					<b-button v-if="project.slides.path !== ''" class="button" type="is-primary" style="margin-bottom: 5px" @click="project.slides.modal=true">PowerPoint</b-button>
-					<b-button v-if="project.paper.path !== ''" class="button" type="is-primary" style="margin-bottom: 5px" @click="project.paper.modal=true">Paper </b-button>
-					
-					<b-modal :active.sync="project.presentation" height="90vh" width="95vw">
-						<div class="card" style="width: 95vw; overflow-y: hidden; padding: 0; background: black">
-							<div class="card-content" style="padding: 0">
-								<div class="content">
-									<iframe :src="presentations[project.username]" style="height: 90vh; width: 95vw" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+				<footer class="card-footer">
+					<div class="card-footer-item" style="justify-content: space-around">
+						<b-button v-if="project.language in presentations" class="button" type="is-primary" style="margin-bottom: 5px" @click="project.presentation=true">YouTube</b-button>
+						<b-button v-if="project.slides.path !== ''" class="button" type="is-primary" style="margin-bottom: 5px" @click="project.slides.modal=true">PowerPoint</b-button>
+						<b-button v-if="project.paper.path !== ''" class="button" type="is-primary" style="margin-bottom: 5px" @click="project.paper.modal=true">Paper</b-button>
+						
+						<b-modal :active.sync="project.presentation" height="90vh" width="95vw">
+							<div class="card" style="width: 95vw; overflow-y: hidden; padding: 0; background: black">
+								<div class="card-content" style="padding: 0">
+									<div class="content">
+										<iframe :src="presentations[project.final]" style="height: 90vh; width: 95vw" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+									</div>
 								</div>
 							</div>
-						</div>
-					</b-modal>
-					
-					<b-modal :active.sync="project.slides.modal" height="95vh" width="75vw">
-						<div class="card" style="width: 75vw; overflow-y: hidden; padding: 0">
-							<div class="card-content" style="padding: 0">
-								<div class="content">
-									<iframe :src="project.slides.path" style="height: 90vh; width: 75vw"></iframe>
+						</b-modal>
+						
+						<b-modal :active.sync="project.slides.modal" height="95vh" width="75vw">
+							<div class="card" style="width: 75vw; overflow-y: hidden; padding: 0">
+								<div class="card-content" style="padding: 0">
+									<div class="content">
+										<iframe :src="project.slides.path" style="height: 90vh; width: 75vw"></iframe>
+									</div>
 								</div>
 							</div>
-						</div>
-					</b-modal>
-					
-					<b-modal :active.sync="project.paper.modal" height="95vh" width="55vw">
-						<div class="card" style="width: 55vw; overflow-y: hidden; padding: 0">
-							<div class="card-content" style="padding: 0">
-								<div class="content">
-									<iframe :src="project.paper.path" style="height: 90vh; width: 55vw"></iframe>
+						</b-modal>
+						
+						<b-modal :active.sync="project.paper.modal" height="95vh" width="55vw">
+							<div class="card" style="width: 55vw; overflow-y: hidden; padding: 0">
+								<div class="card-content" style="padding: 0">
+									<div class="content">
+										<iframe :src="project.paper.path" style="height: 90vh; width: 55vw"></iframe>
+									</div>
 								</div>
 							</div>
-						</div>
-					</b-modal>
+						</b-modal>
+					</div>
 				</footer>
 			</div>
 		</div>
@@ -80,22 +82,16 @@
 		data: () => ({
 			finals: [],
 			fullNames: {
-			
+			//"smithj1": "John A. Smith"
 			},
 			titles: {
-			
+			//"smithj1": "Conceptual Implementation of..."
 			},
 			abstracts: {
-			
+			//Leave blank
 			},
 			presentations: {
-				"Julia": "https://www.youtube.com/embed/ZPvwzmJF4Jc",
-				"Elm": "https://www.youtube.com/embed/XxFOFKXM-5s",
-				"Lua": "https://www.youtube.com/embed/eOtMCUV3vL0",
-				"Io": "https://www.youtube.com/embed/x2KtYbNzhSg",
-				"Factor": "https://www.youtube.com/embed/FjW4-5tGidk",
-				"Prolog": "https://www.youtube.com/embed/n0WfrbltxdU",
-				"CLIPS": "https://www.youtube.com/embed/XX8Fxze6Np8",
+				//"smithj1": "https://www.youtube.com/embed/..."
 			}
 		}),
 		methods: {
