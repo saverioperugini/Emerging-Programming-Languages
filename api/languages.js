@@ -11,18 +11,27 @@ function getIndex(key, array) {
 	return -1;
 }
 
+function getIndexFinal(key, array) {
+	for (let i = 0; i < array.length; i++) {
+		if (array[i].final === key) {
+			return i;
+		}
+	}
+	return -1;
+}
+
 app.get("/", function(req, res) {
 	let languages = [];
 	let languagesObj = [];
 	
-	recursive("static", function(err, files) {
+	recursive("static/languages", function(err, files) {
 		files = files.map(path => path.replace(/\\/gm, "/")).sort();
 		
 		files.forEach(item => {
 			if (item.includes("html") || item.includes("pdf")) {
 				let parts = item.split("/");
-				if (languages.includes(parts[1])) {
-					let i = getIndex(parts[1], languagesObj);
+				if (languages.includes(parts[2])) {
+					let i = getIndex(parts[2], languagesObj);
 					
 					if(item.includes("html")) {
 						languagesObj[i].notes.path = "http://localhost:3000/" + parts.slice(1).join("/")
@@ -35,10 +44,10 @@ app.get("/", function(req, res) {
 					}
 					
 				} else {
-					languages.push(parts[1]);
+					languages.push(parts[2]);
 					
 					let lang = {
-						language: parts[1],
+						language: parts[2],
 						notes: {
 							modal: false,
 							path: ''
@@ -72,6 +81,55 @@ app.get("/", function(req, res) {
 		});
 		
 		res.send(languagesObj);
+	});
+});
+
+app.get("/finals", function(req, res) {
+	let finals = [];
+	let finalsObj = [];
+	
+	recursive("static/finals", function(err, files) {
+		files = files.map(path => path.replace(/\\/gm, "/")).sort();
+		
+		files.forEach(item => {
+			if (item.includes("pdf")) {
+				let parts = item.split("/");
+				if (finals.includes(parts[2])) {
+					let i = getIndexFinal(parts[2], finalsObj);
+					
+					if(item.includes("paper")) {
+						finalsObj[i].paper.path = "http://localhost:3000/" + parts.slice(1).join("/")
+					} else if(parts.includes('presentation')) {
+						finalsObj[i].slides.path = "http://localhost:3000/" + parts.slice(1).join("/")
+					}
+					
+				} else {
+					finals.push(parts[2]);
+					
+					let final = {
+						final: parts[2],
+						paper: {
+							modal: false,
+							path: ''
+						},
+						slides: {
+							modal: false,
+							path: ''
+						}
+					};
+					
+					if(item.includes("paper")) {
+						final.paper.path = "http://localhost:3000/" + parts.slice(1).join("/")
+					} else if(parts.includes('presentation')) {
+						final.slides.path = "http://localhost:3000/" + parts.slice(1).join("/")
+					}
+					
+					finalsObj.push(final);
+				}
+			}
+		});
+		
+		res.send(finalsObj);
 	});
 });
 
