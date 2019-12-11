@@ -34,13 +34,13 @@ app.get("/", function(req, res) {
 					let i = getIndex(parts[2], languagesObj);
 					
 					if(item.includes("html")) {
-						languagesObj[i].notes.path = "http://localhost:3000/" + parts.slice(1).join("/")
+						languagesObj[i].notes.path = parts.slice(1).join("/")
 					} else if(parts.includes('reference')) {
-						languagesObj[i].reference.path = "http://localhost:3000/" + parts.slice(1).join("/")
+						languagesObj[i].reference.path = parts.slice(1).join("/")
 					} else if(parts.includes('synopsis')) {
-						languagesObj[i].synopsis.path = "http://localhost:3000/" + parts.slice(1).join("/")
+						languagesObj[i].synopsis.path = parts.slice(1).join("/")
 					} else if(parts.includes('presentation')) {
-						languagesObj[i].slides.path = "http://localhost:3000/" + parts.slice(1).join("/")
+						languagesObj[i].slides.path = parts.slice(1).join("/")
 					}
 					
 				} else {
@@ -68,11 +68,11 @@ app.get("/", function(req, res) {
 					};
 					
 					if(item.includes("html")) {
-						lang.notes.path = "http://localhost:3000/" + parts.slice(1).join("/")
+						lang.notes.path = parts.slice(1).join("/")
 					} else if(parts.includes('reference')) {
-						lang.reference.path = "http://localhost:3000/" + parts.slice(1).join("/")
+						lang.reference.path = parts.slice(1).join("/")
 					} else if(parts.includes('synopsis')) {
-						lang.synopsis.path = "http://localhost:3000/" + parts.slice(1).join("/")
+						lang.synopsis.path = parts.slice(1).join("/")
 					}
 					
 					languagesObj.push(lang);
@@ -94,20 +94,21 @@ app.get("/finals", function(req, res) {
 		files.forEach(item => {
 			if (item.includes("pdf")) {
 				let parts = item.split("/");
-				if (finals.includes(parts[2])) {
-					let i = getIndexFinal(parts[2], finalsObj);
+				let names = parts[2].split("-");
+				if (finals.includes(names[0])) {
+					let i = getIndexFinal(names[0], finalsObj);
 					
 					if(item.includes("paper")) {
-						finalsObj[i].paper.path = "http://localhost:3000/" + parts.slice(1).join("/")
+						finalsObj[i].paper.path = parts.slice(1).join("/")
 					} else if(parts.includes('presentation')) {
-						finalsObj[i].slides.path = "http://localhost:3000/" + parts.slice(1).join("/")
+						finalsObj[i].slides.path = parts.slice(1).join("/")
 					}
 					
 				} else {
-					finals.push(parts[2]);
+					finals.push(names[0]);
 					
 					let final = {
-						final: parts[2],
+						final: names[0],
 						paper: {
 							modal: false,
 							path: ''
@@ -119,9 +120,9 @@ app.get("/finals", function(req, res) {
 					};
 					
 					if(item.includes("paper")) {
-						final.paper.path = "http://localhost:3000/" + parts.slice(1).join("/")
+						final.paper.path = parts.slice(1).join("/")
 					} else if(parts.includes('presentation')) {
-						final.slides.path = "http://localhost:3000/" + parts.slice(1).join("/")
+						final.slides.path = parts.slice(1).join("/")
 					}
 					
 					finalsObj.push(final);
