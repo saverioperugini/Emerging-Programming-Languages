@@ -92,16 +92,18 @@ app.get("/finals", function(req, res) {
 		files = files.map(path => path.replace(/\\/gm, "/")).sort();
 		
 		files.forEach(item => {
-			if (item.includes("pdf")) {
+			if (item.includes("pdf") || item.includes("html")) {
 				let parts = item.split("/");
 				let names = parts[2].split("-");
 				if (finals.includes(names[0])) {
 					let i = getIndexFinal(names[0], finalsObj);
 					
-					if(item.includes("paper")) {
+					if(parts.includes("paper")) {
 						finalsObj[i].paper.path = parts.slice(1).join("/")
 					} else if(parts.includes('presentation')) {
 						finalsObj[i].slides.path = parts.slice(1).join("/")
+					} else if(item.includes('html')) {
+						finalsObj[i].abstract = parts.slice(1).join("/")
 					}
 					
 				} else {
@@ -109,6 +111,7 @@ app.get("/finals", function(req, res) {
 					
 					let final = {
 						final: names[0],
+						abstract: '',
 						paper: {
 							modal: false,
 							path: ''
@@ -119,10 +122,12 @@ app.get("/finals", function(req, res) {
 						}
 					};
 					
-					if(item.includes("paper")) {
+					if(parts.includes("paper")) {
 						final.paper.path = parts.slice(1).join("/")
 					} else if(parts.includes('presentation')) {
 						final.slides.path = parts.slice(1).join("/")
+					} else if(item.includes('html')) {
+						final.abstract = parts.slice(1).join("/")
 					}
 					
 					finalsObj.push(final);
