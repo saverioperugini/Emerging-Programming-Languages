@@ -1,0 +1,10 @@
+source https://api.nuget.org/v3/index.json
+
+generate_load_scripts: true
+storage: none
+framework: netstandard2.0
+
+nuget Fable.Fetch
+nuget Fable.Elmish.React
+nuget Fable.Elmish.Debugger
+nuget Fable.Elmish.Browser
