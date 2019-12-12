@@ -48,6 +48,18 @@
 		}
 	},
 	{
+		"final":    "reichelc1",
+		"abstract": "<a name=\"ltalatinian1\"/>\n<center>\n<h3>N-Queens Puzzle in Kotlin</h3>\n\n<h3>Corey J. Reichel</h3>\n\n<b>Abstract</b>\n</center>\n<blockquote>\nPuzzles such as eight spaces or queens games are useful for testing \nthe efficiency of a given algorithm in which there is an exhuastible \ndomain. These puzzles are good models to develop algorithms that have \napplications to various domains in computer science~\\cite{ayub}. With \nthese types of puzzles minimizing search space dramatically improves \nperformance and memory usage as the size of the problem increases. We \ndemonstrate valid solutions to Queen's game on varying size boards with \ndifferent types of algorithms using lazy evaluation and depth first \nsearch algorithms in Kotlin. Starting from simple brute-force algorithms \nthat merely guess and check, to more refined algorithms such as depth-first \nand look-ahead that attempt to trim the search space by eliminate unnecessary computations.\n</blockquote>\n\n<br/>\nFinal <a href=\"../paper/ltalatinian1-paper.pdf\">paper</a> and <a href=\"presentation/reichelc1-presentation.pdf\">presentation</a>.\n",
+		"paper":    {
+			"modal": false,
+			"path":  "finals/reichelc1-Final/reichelc1-Final/paper/paper.pdf"
+		},
+		"slides":   {
+			"modal": false,
+			"path":  "finals/reichelc1-Final/reichelc1-Final/presentation/reichelc1-presentation.pdf"
+		}
+	},
+	{
 		"final":    "schwartzj1",
 		"abstract": "<a name=\"schwartzj1\"/>\n<center>\n<h3>Kotlin Mobile Application for PC Control</h3>\n\n<h3>Jacob T. Schwartz</h3>\n\n<b>Abstract</b>\n</center>\n<blockquote>\nWe present a PC remote Bluetooth control application implemented in the Kotlin programming language for Android. Using the Android Bluetooth library, the mobile application communicates with a local server running on a client PC to interact with it’s operating system and perform actions such as volume control, custom keystrokes, turning off or rebooting the device, and more. The client server runs on Kotlin, utilizing the languages ability to interoperate with the Java programming language to utilize Javax’s Bluecove library to communicate with the client machine’s Bluetooth adapter. This is the only option to write a Bluetooth server on any desktop operating system, as the only native Kotlin library for Bluetooth communication, at this time, works exclusively on the Android operating system; Android, nor its fork to create Internet of Things devices (Android of Things) are capable of running alongside major operating systems.\n</blockquote>\n\n<br/>\nFinal <a href=\"../paper/schwartzj1-Lynkr.pdf\">paper</a> and <a href=\"../presentation/Lynkr.pdf\">presentation</a>.\n",
 		"paper":    {
