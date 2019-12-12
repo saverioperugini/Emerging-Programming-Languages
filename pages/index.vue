@@ -84,7 +84,7 @@
 			}
 		},
 		mounted() {
-			this.$axios.$get(window.location.origin + "/languages")
+			this.$axios.$get(window.location.origin + "/languages.json")
 				.then(res => {
 					this.languages = res;
 				})

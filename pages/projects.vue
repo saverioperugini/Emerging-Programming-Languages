@@ -62,7 +62,7 @@
 			Card
 		},
 		created() {
-			this.$axios.$get(window.location.origin + "/languages/finals")
+			this.$axios.$get(window.location.origin + "/finals.json")
 				.then(res => {
 					console.log(res);
 					this.finals = res;
@@ -81,15 +81,9 @@
 		},
 		data: () => ({
 			finals: [],
-			fullNames: {
-			//"smithj1": "John A. Smith"
-			},
-			titles: {
-			//"smithj1": "Conceptual Implementation of..."
-			},
-			abstracts: {
-			//Leave blank
-			},
+			fullNames: {},
+			titles: {},
+			abstracts: {},
 			presentations: {
 				//"smithj1": "https://www.youtube.com/embed/..."
 			}
