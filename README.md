@@ -1,4 +1,4 @@
-# CPS452Site
+# CPS 452: Emerging Programming Languages Website
 
 > Emerging Programming Languages
 
