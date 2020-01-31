@@ -5,7 +5,7 @@
 //   description:  Handles the startup of all program elements and concurrent communication
 //
 //        author:  Schwartz, Jacob T.
-//       Copyright (c) 2019 Schwartz, Jacob T. University of Dayton
+//       Copyright (c) 2019 Schwartz, Jacob T.
 //
 //******************************************************************************
 
@@ -16,12 +16,13 @@ import kotlinx.coroutines.launch
 object ChannelManager {
     val access = Channel<String>()
 	val keystroke = Channel<String>()
+	val media = Channel<String>()
     val power = Channel<String>()
     val volume = Channel<String>()
 }
 
 fun main(args: Array<String>) {
-    Access; Keystroke; Power; Volume
+    Access; Keystroke; Media; Power; Volume
 
     GlobalScope.launch {
         while (true) {
@@ -37,21 +38,37 @@ fun main(args: Array<String>) {
         }
 
     }
+	
+	GlobalScope.launch {
+		while (true) {
+			val action = ChannelManager.media.receive()
+			
+			println("Media Received Action: $action")
+			
+			when (action) {
+				"next" -> Media.nextTrack()
+				"playpause" -> Media.togglePlay()
+				"previous" -> Media.prevTrack()
+				else -> error("Media Cannot Handle: $action")
+			}
+		}
+		
+	}
 
     GlobalScope.launch {
-        while (true) {
-            val action = ChannelManager.power.receive()
-
-            println("Power Received Action: $action")
-
-            when (action) {
-                "shutdown" -> Power.shutdown()
-                "restart" -> Power.restart()
-                "hibernate" -> Power.hibernate()
-                else -> error("Power Cannot Handle: $action")
-            }
-        }
-
+	    while (true) {
+		    val action = ChannelManager.power.receive()
+		
+		    println("Power Received Action: $action")
+		
+		    when (action) {
+			    "shutdown" -> Power.shutdown()
+			    "restart" -> Power.restart()
+			    "hibernate" -> Power.hibernate()
+			    else -> error("Power Cannot Handle: $action")
+		    }
+	    }
+	
     }
 
     GlobalScope.launch {
@@ -64,7 +81,13 @@ fun main(args: Array<String>) {
                 "increase" -> Volume.increase()
                 "decrease" -> Volume.decrease()
                 "mute" -> Volume.toggleMute()
-                else -> error("Volume Cannot Handle: $action")
+                else -> {
+	                try {
+		                Volume.setLevel(action.toInt())
+	                } catch (ex: NumberFormatException) {
+		                ex.printStackTrace()
+	                }
+                }
             }
         }
     }
@@ -75,13 +98,7 @@ fun main(args: Array<String>) {
 			
 			println("Keystroke Received Action: $action")
 			
-			when (action) {
-				"alpha" -> Keystroke.alpha()
-				"beta" -> Keystroke.beta()
-				"gamma" -> Keystroke.gamma()
-				"delta" -> Keystroke.delta()
-				else -> error("Keystroke Cannot Handle: $action")
-			}
+			Keystroke.run(action)
 		}
 	}
 
