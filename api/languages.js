@@ -85,11 +85,11 @@ app.get("/", function(req, res) {
 	});
 });
 
-app.get("/finals", function(req, res) {
+app.get("/projects", function(req, res) {
 	let finals = [];
 	let finalsObj = [];
 	
-	recursive("static/finals", function(err, files) {
+	recursive("static/projects", function(err, files) {
 		files = files.map(path => path.replace(/\\/gm, "/")).sort();
 		
 		files.forEach(item => {

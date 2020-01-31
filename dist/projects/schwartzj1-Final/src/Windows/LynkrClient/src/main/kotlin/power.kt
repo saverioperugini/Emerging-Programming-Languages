@@ -5,7 +5,7 @@
 //   description:  Power control module
 //
 //        author:  Schwartz, Jacob T.
-//       Copyright (c) 2019 Schwartz, Jacob T. University of Dayton
+//       Copyright (c) 2019 Schwartz, Jacob T.
 //
 //******************************************************************************
 
