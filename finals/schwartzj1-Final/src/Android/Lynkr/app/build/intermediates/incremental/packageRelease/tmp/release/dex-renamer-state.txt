@@ -1,0 +1,4 @@
+#Mon Dec 09 12:58:56 EST 2019
+base.0=C\:\\Users\\jtsch\\Workspace\\AndroidStudio\\Lynkr\\app\\build\\intermediates\\dex\\release\\mergeDexRelease\\out\\classes.dex
+path.0=classes.dex
+renamed.0=classes.dex

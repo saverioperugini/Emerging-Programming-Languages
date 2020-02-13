@@ -1,0 +1,95 @@
+1<?xml version="1.0" encoding="utf-8"?>
+2<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+3    package="com.jtschwartz.lynkr"
+4    android:versionCode="1"
+5    android:versionName="1.0" >
+6
+7    <uses-sdk
+8        android:minSdkVersion="23"
+8-->C:\Users\jtsch\Workspace\AndroidStudio\Lynkr\app\src\main\AndroidManifest.xml
+9        android:targetSdkVersion="29" />
+9-->C:\Users\jtsch\Workspace\AndroidStudio\Lynkr\app\src\main\AndroidManifest.xml
+10
+11    <uses-permission android:name="android.permission.BLUETOOTH" />
+11-->C:\Users\jtsch\Workspace\AndroidStudio\Lynkr\app\src\main\AndroidManifest.xml:5:2-65
+11-->C:\Users\jtsch\Workspace\AndroidStudio\Lynkr\app\src\main\AndroidManifest.xml:5:19-62
+12    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
+12-->C:\Users\jtsch\Workspace\AndroidStudio\Lynkr\app\src\main\AndroidManifest.xml:6:2-71
+12-->C:\Users\jtsch\Workspace\AndroidStudio\Lynkr\app\src\main\AndroidManifest.xml:6:19-68
+13
+14    <application
+14-->C:\Users\jtsch\Workspace\AndroidStudio\Lynkr\app\src\main\AndroidManifest.xml:8:2-42:16
+15        android:allowBackup="true"
+15-->C:\Users\jtsch\Workspace\AndroidStudio\Lynkr\app\src\main\AndroidManifest.xml:9:3-29
+16        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
+16-->[androidx.core:core:1.1.0] C:\Users\jtsch\.gradle\caches\transforms-2\files-2.1\df2ac4fe6b88cbdd1c862077d2fdf1ec\core-1.1.0\AndroidManifest.xml:24:18-86
+17        android:fullBackupContent="true"
+17-->C:\Users\jtsch\Workspace\AndroidStudio\Lynkr\app\src\main\AndroidManifest.xml:10:3-35
+18        android:icon="@mipmap/chain_logo"
+18-->C:\Users\jtsch\Workspace\AndroidStudio\Lynkr\app\src\main\AndroidManifest.xml:11:3-36
+19        android:label="@string/app_name"
+19-->C:\Users\jtsch\Workspace\AndroidStudio\Lynkr\app\src\main\AndroidManifest.xml:12:3-35
+20        android:roundIcon="@mipmap/chain_logo"
+20-->C:\Users\jtsch\Workspace\AndroidStudio\Lynkr\app\src\main\AndroidManifest.xml:13:3-41
+21        android:supportsRtl="true"
+21-->C:\Users\jtsch\Workspace\AndroidStudio\Lynkr\app\src\main\AndroidManifest.xml:14:3-29
+22        android:theme="@style/AppTheme" >
+22-->C:\Users\jtsch\Workspace\AndroidStudio\Lynkr\app\src\main\AndroidManifest.xml:15:3-34
+23        <meta-data
+23-->C:\Users\jtsch\Workspace\AndroidStudio\Lynkr\app\src\main\AndroidManifest.xml:16:3-18:38
+24            android:name="com.google.android.actions"
+24-->C:\Users\jtsch\Workspace\AndroidStudio\Lynkr\app\src\main\AndroidManifest.xml:17:4-45
+25            android:resource="@xml/actions" />
+25-->C:\Users\jtsch\Workspace\AndroidStudio\Lynkr\app\src\main\AndroidManifest.xml:18:4-35
+26
+27        <activity
+27-->C:\Users\jtsch\Workspace\AndroidStudio\Lynkr\app\src\main\AndroidManifest.xml:20:3-34:14
+28            android:name="com.jtschwartz.lynkr.MainActivity"
+28-->C:\Users\jtsch\Workspace\AndroidStudio\Lynkr\app\src\main\AndroidManifest.xml:21:4-32
+29            android:screenOrientation="portrait" >
+29-->C:\Users\jtsch\Workspace\AndroidStudio\Lynkr\app\src\main\AndroidManifest.xml:22:4-40
+30            <intent-filter>
+30-->C:\Users\jtsch\Workspace\AndroidStudio\Lynkr\app\src\main\AndroidManifest.xml:23:4-33:20
+31                <action android:name="android.intent.action.VIEW" />
+31-->C:\Users\jtsch\Workspace\AndroidStudio\Lynkr\app\src\main\AndroidManifest.xml:24:5-57
+31-->C:\Users\jtsch\Workspace\AndroidStudio\Lynkr\app\src\main\AndroidManifest.xml:24:13-54
+32
+33                <category android:name="android.intent.category.BROWSABLE" />
+33-->C:\Users\jtsch\Workspace\AndroidStudio\Lynkr\app\src\main\AndroidManifest.xml:25:5-66
+33-->C:\Users\jtsch\Workspace\AndroidStudio\Lynkr\app\src\main\AndroidManifest.xml:25:15-63
+34
+35                <action android:name="android.intent.action.MAIN" />
+35-->C:\Users\jtsch\Workspace\AndroidStudio\Lynkr\app\src\main\AndroidManifest.xml:26:5-57
+35-->C:\Users\jtsch\Workspace\AndroidStudio\Lynkr\app\src\main\AndroidManifest.xml:26:13-54
+36
+37                <category android:name="android.intent.category.VOICE" />
+37-->C:\Users\jtsch\Workspace\AndroidStudio\Lynkr\app\src\main\AndroidManifest.xml:27:5-62
+37-->C:\Users\jtsch\Workspace\AndroidStudio\Lynkr\app\src\main\AndroidManifest.xml:27:15-59
+38                <category android:name="android.intent.category.LAUNCHER" />
+38-->C:\Users\jtsch\Workspace\AndroidStudio\Lynkr\app\src\main\AndroidManifest.xml:28:5-65
+38-->C:\Users\jtsch\Workspace\AndroidStudio\Lynkr\app\src\main\AndroidManifest.xml:28:15-62
+39
+40                <data
+40-->C:\Users\jtsch\Workspace\AndroidStudio\Lynkr\app\src\main\AndroidManifest.xml:30:5-32:31
+41                    android:host="action.lynkr.com"
+41-->C:\Users\jtsch\Workspace\AndroidStudio\Lynkr\app\src\main\AndroidManifest.xml:31:6-37
+42                    android:scheme="https" />
+42-->C:\Users\jtsch\Workspace\AndroidStudio\Lynkr\app\src\main\AndroidManifest.xml:32:6-28
+43            </intent-filter>
+44        </activity>
+45        <activity
+45-->C:\Users\jtsch\Workspace\AndroidStudio\Lynkr\app\src\main\AndroidManifest.xml:35:3-41:14
+46            android:name="com.jtschwartz.lynkr.SettingsActivity"
+46-->C:\Users\jtsch\Workspace\AndroidStudio\Lynkr\app\src\main\AndroidManifest.xml:36:4-36
+47            android:screenOrientation="portrait" >
+47-->C:\Users\jtsch\Workspace\AndroidStudio\Lynkr\app\src\main\AndroidManifest.xml:37:4-40
+48            <meta-data
+48-->C:\Users\jtsch\Workspace\AndroidStudio\Lynkr\app\src\main\AndroidManifest.xml:38:4-40:37
+49                android:name="android.support.PARENT_ACTIVITY"
+49-->C:\Users\jtsch\Workspace\AndroidStudio\Lynkr\app\src\main\AndroidManifest.xml:39:5-51
+50                android:value=".MainActivity" />
+50-->C:\Users\jtsch\Workspace\AndroidStudio\Lynkr\app\src\main\AndroidManifest.xml:40:5-34
+51        </activity>
+52    </application>
+53
+54</manifest>
