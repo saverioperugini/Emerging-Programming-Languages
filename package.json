@@ -8,11 +8,14 @@
     "dev": "nuxt",
     "build": "nuxt build",
     "start": "nuxt start",
-    "generate": "nuxt generate"
+    "generate": "nuxt generate",
+    "deploy": "gh-pages -d dist"
   },
   "dependencies": {
     "@nuxtjs/axios": "^5.8.0",
+    "express": "latest",
     "fs": "0.0.1-security",
+    "gh-pages": "^2.2.0",
     "jquery": "^3.4.1",
     "lodash": "latest",
     "ncp": "^2.0.0",
@@ -20,8 +23,7 @@
     "nuxt": "^2.0.0",
     "nuxt-buefy": "^0.3.2",
     "recursive-readdir": "^2.2.2",
-    "sass-loader": "^8.0.0",
-    "express": "latest"
+    "sass-loader": "^8.0.0"
   },
   "devDependencies": {
     "@fortawesome/fontawesome-free": "^5.11.2"

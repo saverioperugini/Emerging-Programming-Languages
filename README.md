@@ -116,7 +116,7 @@ $ npm run dev
 $ npm run generate
 
 5.) Use subtree push to send it to the gh-pages branch on GitHub.
-$ git subtree push --prefix dist origin gh-pages
+$ npm run deploy
 ```
 
 ## GitHub Pages Setup

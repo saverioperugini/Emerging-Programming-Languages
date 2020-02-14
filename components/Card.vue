@@ -5,7 +5,7 @@
 				<p class="card-header-title is-size-5 has-text-grey">
 					{{ title }}
 				</p>
-				<a class="has-text-grey" target="_blank" :href="'https://github.com/saverioperugini/Emerging-Languages-Spring-2017/tree/master/static/languages' + title">
+				<a class="has-text-grey" target="_blank" :href="'https://github.com/saverioperugini/Emerging-Programming-Languages/tree/gh-pages/languages/' + title">
 					<b-icon icon="code-not-equal-variant" type="is-large"/>
 				</a>
 			</header>

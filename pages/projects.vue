@@ -62,7 +62,7 @@
 			Card
 		},
 		created() {
-			this.$axios.$get(window.location.origin + "/finals.json")
+			this.$axios.$get("https://saverioperugini.github.io/Emerging-Programming-Languages/finals.json")
 				.then(res => {
 					console.log(res);
 					this.finals = res;

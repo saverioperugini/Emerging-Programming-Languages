@@ -84,7 +84,7 @@
 			}
 		},
 		mounted() {
-			this.$axios.$get(window.location.origin + "/languages.json")
+			this.$axios.$get("https://saverioperugini.github.io/Emerging-Programming-Languages/languages.json")
 				.then(res => {
 					this.languages = res;
 				})

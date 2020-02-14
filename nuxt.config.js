@@ -14,7 +14,10 @@ export default {
         content: process.env.npm_package_description || ""
       }
     ],
-    link: [{ rel: "icon", type: "image/x-icon", href: "/favicon.ico" }]
+    link: [{ rel: "icon", type: "image/x-icon", href: "favicon.ico" }]
+  },
+  router: {
+    base: '/Emerging-Programming-Languages/'
   },
   /*
    ** Customize the progress-bar color
@@ -47,6 +50,7 @@ export default {
     /*
      ** You can extend webpack config here
      */
+    publicPath: '/nuxt/',
     extend(config, ctx) {}
   },
   serverMiddleware: [{ path: "/languages", handler: "~/api/languages.js" }]
