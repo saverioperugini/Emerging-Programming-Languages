@@ -7,6 +7,9 @@
 						<span class=" is-size-3">{{ titles[project.final] }}</span><br/>
 						<span class="is-size-4">{{ fullNames[project.final] }}</span>
 					</p>
+					<a class="has-text-grey" style="padding: 1rem" target="_blank" :href="`https://github.com/saverioperugini/Emerging-Programming-Languages/tree/gh-pages/projects/${project.final}`">
+						Source Code
+					</a>
 				</header>
 				<div class="card-content">
 					{{ abstracts[project.final] }}
@@ -62,7 +65,7 @@
 			Card
 		},
 		created() {
-			this.$axios.$get("https://saverioperugini.github.io/Emerging-Programming-Languages/finals.json")
+			this.$axios.$get("https://saverioperugini.github.io/Emerging-Programming-Languages/projects.json")
 				.then(res => {
 					console.log(res);
 					this.finals = res;
