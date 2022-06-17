@@ -1,0 +1,596 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Introduction to Clojure Programming Language </title>
+  <link rel="stylesheet" type="text/css" href="pl.css"/>
+</head>
+<body>
+<header>
+  Introduction to the Clojure Programming Language
+</header>
+<article>
+  <div class="subheader">Key Language Concepts in Clojure</div>
+
+  <ul>
+    <li>This is a functional language on the JVM.</li>
+    <li>Very similar to LISP stylistically, but with lots more syntactic sugar.</li>
+    <li>No built in Currying. Can use partial functions.</li>
+    <li>No first class access to continuations.</li>
+    </li>
+  </ul>
+
+  <div class="subheader">Core Clojure</div>
+
+  <ul>
+    <li>Dynamic typing.</li>
+    <li>Includes Java standard library.</li>
+    <li>Argument destructuring.</li>
+    <li>Pass-by-value (with references).</li>
+    <li>Provides good functional integration with object-oriented types.</li>
+    <li>Clojure has both static and dynamic scoping.</li>
+  </ul>
+
+  <div class="subheader">Data Structures</div>
+  <div>
+    <h3>Lists</h3>
+    <ul>
+      <li>Lists in clojure are very similar to LISP.</li>
+      <li>You also get some more functionality like <code>last</code>
+      </li>
+      <br/>
+      <code class="code-block">
+        (list 1 2 3) ; (1 2 3)
+        <br/>
+        (first '(1 2 3)) ; 1
+        <br/>
+        (last '(1 2 3)) ; 3
+        <br/>
+        (rest '(1 2 3)) ; (2 3)
+        <br/>
+        (cons 1 '(2 3)) ; (1 2 3)
+      </code>
+    </ul>
+  </div>
+  <div>
+    <h3>Vectors</h3>
+    <ul>
+      <li>Notice that using list functions on vectors produce lists</li>
+      <code class="code-block">
+        [1 2 3] ; [1 2 3]
+        <br/>
+        (rest [1 2 3]) ; (2 3)
+        <br/>
+        (nth [1 2 3] 2) ; 3
+        <br/>
+        ([1 2 3] 2) ; 3
+        <br/>
+        (concat [1 2 3] [4]) ; (1 2 3 4)
+      </code>
+    </ul>
+  </div>
+  <div>
+    <h3>Sets</h3>
+    <ul>
+      <code class="code-block">
+        #{1 2 3} ; #{1 3 2}
+        <br/>
+        (sort #{1 3 2}) ; (1 2 3)
+        <br/>
+        (sorted-set 2 3 1) ; #{1 2 3}
+      </code>
+    </ul>
+  </div>
+  <div>
+    <h3>Maps</h3>
+    <ul>
+      <code class="code-block">
+        (def myMap {:key "value", :a "b"})
+        <br/>
+        (:key myMap) ; "value"
+        <br/>
+        (sorted-map 1 :one, 3 :three, 2 :two) ; {1 :one, 2 :two, 3 :three}
+      </code>
+    </ul>
+  </div>
+  <div class="subheader">Functions</div>
+  <div>
+    <h3>Defining Functions</h3>
+    <ul>
+      <code class="code-block">
+        (defn ex <br/>
+        &emsp;"joins two strings with an and" <br/>
+        &emsp;[x y] (str x " and " y) <br/>
+        &emsp;)<br/>
+      </code>
+    </ul>
+  </div>
+  <div>
+    <h3>Defining Anonymous Functions</h3>
+    <ul>
+      <code class="code-block">
+        (def ex2 <br/>
+        &emsp;"joins two strings with an and" <br/>
+        &emsp;(fn [x y] (str x " and " y) <br/>
+        &emsp;)
+      </code>
+    </ul>
+  </div>
+  <div>
+    <h3>Smaller Anonymous Functions</h3>
+    <ul>
+      <li>The arguments are passed in as <code>%[argNum]</code></li>
+      <li>To get all arguments do <code>%&</code></li>
+      <code class="code-block">
+        (def ex3 <br/>
+        &emsp;"joins two strings with an and" <br/>
+        &emsp;#(str %1 " and " %2) <br/>
+        &emsp;)
+      </code>
+      <br>
+      <h4>
+        Usage
+      </h4>
+      These functions can be used effectively when passed to higher-order functions like <code class="code-block">map</code>
+      <br/>
+      <br/>
+      <code class="code-block">
+        (map #(* %1 %1) '(1 2 3 4)) ; (1 4 9 16)
+      </code>
+    </ul>
+  </div>
+  <div>
+    <h3>Function Invocation</h3>
+    <ul>
+      <code class="code-block">
+        (ex "Tom" "Tyler") ; "Tom and Tyler"
+      </code>
+    </ul>
+  </div>
+  <div>
+    <h3>Parameter Deconstructing</h3>
+    <ul>
+      <li>You can deconstruct parameters in functions.</li>
+      <li>Leftover parameters are collected in a list.</li>
+      <br/>
+      <code class="code-block">
+        (defn destruct <br/>
+        &emsp;[[x y & z]] (str x " and " y " and " z) <br/>
+        &emsp;) <br/>
+        (destruct '(1 2 3 4 5)) ; "1 and 2 and (3 4 5)"
+      </code>
+    </ul>
+  </div>
+  <div>
+    <h3>Partial Function Application</h3>
+    <ul>
+      <li>Since Clojure does not support automatic currying,
+        you need to specify when calling a function partially
+      </li>
+      <br/>
+      <code class="code-block">
+        (def tomAnd (partial ex "Tom")) ; Gives back a partial function
+        <br/>
+        (tomAnd "Schwartz") ; "Tom and Schwartz"
+      </code>
+    </ul>
+  </div>
+
+  <div class="subheader">Objects and Interfaces</div>
+  <div>
+    <h3>Interfaces define functions for objects:</h3>
+    <ul>
+      <code class="code-block">
+        (defprotocol Person <br/>
+        &emsp;(getOlder [this]) <br/>
+        &emsp;(getIntro [this]) <br/>
+        &emsp;)
+      </code>
+    </ul>
+  </div>
+  <div>
+    <h3>Objects:</h3>
+    <ul>
+      <li>You need an interface to create methods for an object</li>
+      <br/>
+      <code class="code-block">
+        (defrecord Student [name age] Person <br/>
+        &emsp;(getOlder [this] <br/>
+        &emsp;(Student. (:name this) (inc (:age this)))) <br/>
+        &emsp;(getIntro [this] <br/>
+        &emsp;(format <br/>
+        &emsp;"Hi, My name is %s and I am %d" <br/>
+        &emsp;(:name this) <br/>
+        &emsp;(:age this) <br/>
+        &emsp;)) <br/>
+        )
+      </code>
+    </ul>
+  </div>
+  <div>
+    <h3>Using Objects:</h3>
+    <ul>
+      <code class="code-block">
+        (def tom (Student. "Tom" 21)) ; Creates an object<br/>
+        <br/>
+        ; Call Object methods<br/>
+        (println (.getIntro tom))<br/>
+        (def tom (.getOlder tom))<br/>
+        (println (.getIntro tom))<br/>
+        <br/>
+        ; Get object properties<br/>
+        (:age tom)<br/>
+      </code>
+    </ul>
+  </div>
+  <div class="subheader">Threading Macros</div>
+  <div>
+    <h3>Thread First Macro</h3>
+    This inserts the value from the previous
+    function as the first argument of the next function
+    <br/>
+    <br/>
+    <ul>
+      <code class="code-block">
+        (-> <br/>
+        &emsp;(range 10) <br/>
+        &emsp;(concat '(10))<br/>
+        &emsp;(rest)<br/>
+        &emsp;) ; (1 2 3 4 5 6 7 8 9 10)
+      </code>
+    </ul>
+  </div>
+  <div>
+    <h3>Thread Last Macro</h3>
+    This inserts the value from the previous
+    function as the last argument of the next function
+    <br/>
+    <br/>
+    <ul>
+      <code class="code-block">
+        (->> <br/>
+        &emsp;(range 10) <br/>
+        &emsp;(concat '(-1))<br/>
+        &emsp;(map inc)<br/>
+        &emsp;) ; (0 1 2 3 4 5 6 7 8 9 10)
+      </code>
+    </ul>
+  </div>
+  <div>
+    <h3>Thread <code>as-></code> Macro</h3>
+    Same as <code>-></code> and <code>->></code>
+    but you can specify where the argument goes
+    <ul>
+      <code class="code-block">
+        (as-> <br/>
+        &emsp; (range 10) input<br/>
+        &emsp; (concat input '(10))<br/>
+        &emsp; (rest input)<br/>
+        &emsp; ); (1 2 3 4 5 6 7 8 9 10)
+      </code>
+    </ul>
+  </div>
+  <div>
+    <h3>Thread <code>some-></code> Macro</h3>
+    The same as <code>-></code> and <code>->></code> but will exit if reaching a nil value
+    <br/>
+    The following code snippet will error for <code>-></code>
+    <br/>
+    <br/>
+    <ul>
+      <code class="code-block">
+        (some-><br/>
+        &emsp;{:one 1, :two 2}<br/>
+        &emsp;(:three)<br/>
+        &emsp;(inc)<br/>
+        &emsp;) ; nil
+      </code>
+    </ul>
+  </div>
+  <div>
+    <h3>Thread <code>Cond-></code> Macro</h3>
+    The same as <code>-></code> and <code>->></code> but only performs functions where the condition is met
+    <br/>
+    <br/>
+    <ul>
+      <code class="code-block">
+        (cond-><br/>
+        &emsp;(range 10)<br/>
+        &emsp;(= 5 5) (concat '(10))<br/>
+        &emsp;(= 5 4) (concat '(100))<br/>
+        &emsp;) ; (0 1 2 3 4 5 6 7 8 9 10)<br/>
+      </code>
+    </ul>
+  </div>
+
+  <div class="subheader">Lazy evaluation</div>
+  <div>
+    <h3>Lazy sequences are computed only as needed:</h3>
+    <ul>
+      <code class="code-block">
+        (defn fib-seq<br/>
+        &emsp;([] (fib-seq 0 1))<br/>
+        &emsp;([a b]<br/>
+        &emsp;&emsp;(lazy-seq<br/>
+        &emsp;&emsp;(cons b (fib-seq b (+ a b)))<br/>
+        &emsp;&emsp;))<br/>
+        &emsp;)
+      </code>
+    </ul>
+  </div>
+  <div>
+    <h3><code>take</code> and <code>cycle</code>
+      lazily create lists: </h3>
+    <ul>
+      <code class="code-block">
+        (take 10 (cycle (range 5))) ; (0 1 2 3 4 0 1 2 3 4)
+      </code>
+    </ul>
+  </div>
+
+  <div class="subheader">References and Closures</div>
+  <div>
+    <h3>References</h3>
+    <ul>
+      <li>Clojure uses Software Transactional Memory (STM).</li>
+      <li>References use a single storage location for their lifetime.</li>
+      <br/>
+      <code class="code-block">
+        (def myRef (ref "Ref String")) ; Creates a reference <br/>
+        @myRef ; Accessing the value in a reference<br/>
+        (dosync (ref-set myRef "Reference")); Sets the value of a reference value with a transaction
+      </code>
+    </ul>
+  </div>
+  <div>
+    <h3>Closures</h3>
+    <ul>
+      <li>Closures use references to access out of scope memory</li>
+      <br/>
+      <code class="code-block">
+        (defn counter <br/>
+        &emsp;[]<br/>
+        &emsp;(let [a (atom 0)]<br/>
+        &emsp;(fn [] (do<br/>
+        &emsp;&emsp;(swap! a inc)<br/>
+        &emsp;&emsp;@a))))<br/>
+        (def ct1 (counter))<br/>
+        (ct1); 1<br/>
+        (ct1); 2
+      </code>
+    </ul>
+  </div>
+
+
+  <div class="subheader">Concurrency</div>
+  <div>
+    <h3>Agents</h3>
+    <ul>
+      <li>Agents are asynchronous references</li>
+      <br/>
+      <code class="code-block">
+        (def myAgent (agent 1)); Creates an agent with an initial value<br/>
+        (send myAgent inc); Sends an agent a function that it will perform on its value<br/>
+        @myAgent; 2
+      </code>
+    </ul>
+  </div>
+  <div>
+    <h3>Futures</h3>
+    <ul>
+      <li>Futures return the value of the last function they execute</li>
+      <br/>
+      <code class="code-block">
+        @(future (Thread/sleep 5000) (str "Future complete!"));
+        "Future complete!"
+      </code>
+    </ul>
+  </div>
+  <div>
+    <h3>Threads and Channels</h3>
+    <ul>
+      <code class="code-block">
+        (def buff (chan)); defines a synchronous channel<br/>
+        (go<br/>
+        &emsp;(loop [a 1]<br/>
+        &emsp;&emsp;(cond<br/>
+        &emsp;&emsp;&emsp;(= a 10) (>!! buff false)<br/>
+        &emsp;&emsp;&emsp;:else (do<br/>
+        &emsp;&emsp;&emsp;&emsp;(>!! buff "ping")<br/>
+        &emsp;&emsp;&emsp;&emsp;(println (<!! buff))<br/>
+        &emsp;&emsp;&emsp;&emsp;(recur (inc a))<br/>
+        &emsp;&emsp;))))<br/>
+        <br/>
+        (go<br/>
+        &emsp;(loop []<br/>
+        &emsp;&emsp;(let [value (< !! buff)]<br/>
+        &emsp;&emsp;&emsp;(if<br/>
+        &emsp;&emsp;&emsp;&emsp;value<br/>
+        &emsp;&emsp;&emsp;&emsp;(do<br/>
+        &emsp;&emsp;&emsp;&emsp;&emsp;(println value)<br/>
+        &emsp;&emsp;&emsp;&emsp;&emsp;(>!! buff "pong")<br/>
+        &emsp;&emsp;&emsp;&emsp;&emsp;(recur)<br/>
+        &emsp;&emsp;&emsp;&emsp;)))))<br/>
+        ; ping<br/>
+        ; pong<br/>
+        ; ...
+      </code>
+    </ul>
+  </div>
+  <div>
+    <div class="subheader">Exercises</div>
+    <ol>
+      <li>(10 points)
+        Use a lazy sequence to create a factorial function that returns the nth element in the factorial sequence
+        <br/>
+        <br/>
+      </li>
+
+      <li>(10 points)
+        Define a counter closure that takes a step and initial value as parameters
+        and can increment
+        and decrement by that step
+        <br/>
+        <br/>
+      </li>
+    </ol>
+  </div>
+
+  <div>
+    <div class="subheader">Feature Table</div>
+    <table>
+      <tbody>
+      <tr>
+        <td>First-Class Functions</td>
+        <td><label><input type="checkbox" onclick="checkboxOnClick(this);" class="checked"></label></td>
+      </tr>
+      <tr>
+        <td>λ Expressions</td>
+        <td><label><input type="checkbox" onclick="checkboxOnClick(this);" class="checked"></label></td>
+      </tr>
+      <tr>
+        <td>Higher-Order Functions</td>
+        <td><label><input type="checkbox" onclick="checkboxOnClick(this);" class="checked"></label></td>
+      </tr>
+      <tr>
+        <td>First-Class Closures</td>
+        <td><label><input type="checkbox" onclick="checkboxOnClick(this);" class="checked"></label></td>
+      </tr>
+      <tr>
+        <td>Currying</td>
+        <td><label><input type="checkbox" onclick="checkboxOnClick(this);" class="indeterminate"></label></td>
+      </tr>
+      <tr>
+        <td>Continuation-Passing Style</td>
+        <td><label><input type="checkbox" onclick="checkboxOnClick(this);" class="checked"></label></td>
+      </tr>
+      <tr>
+        <td>First-Class Continuations</td>
+        <td><label><input type="checkbox" onclick="checkboxOnClick(this);" class="unchecked"></label></td>
+      </tr>
+      <tr>
+        <td>Pattern Matching</td>
+        <td><label><input type="checkbox" onclick="checkboxOnClick(this);" class="unchecked"></label></td>
+      </tr>
+      <tr>
+        <td>Strong Typing</td>
+        <td><label><input type="checkbox" onclick="checkboxOnClick(this);" class="unchecked"></label></td>
+      </tr>
+      <tr>
+        <td>Type Systems</td>
+        <td><label><input type="checkbox" onclick="checkboxOnClick(this);" class="checked"></label></td>
+      </tr>
+      <tr>
+        <td>Lazy Evaluation</td>
+        <td><label><input type="checkbox" onclick="checkboxOnClick(this);" class="indeterminate"></label></td>
+      </tr>
+      <tr>
+        <td>List/Generator Comprehension</td>
+        <td><label><input type="checkbox" onclick="checkboxOnClick(this);" class="checked"></label></td>
+      </tr>
+      <tr>
+        <td>Message Passing</td>
+        <td><label><input type="checkbox" onclick="checkboxOnClick(this);" class="indeterminate"></label></td>
+      </tr>
+      <tr>
+        <td>Actor Model of Concurrency</td>
+        <td><label><input type="checkbox" onclick="checkboxOnClick(this);" class="indeterminate"></label></td>
+      </tr>
+      <tr>
+        <td>Coroutines</td>
+        <td><label><input type="checkbox" onclick="checkboxOnClick(this);" class="indeterminate"></label></td>
+      </tr>
+      <tr>
+        <td>Channels</td>
+        <td><label><input type="checkbox" onclick="checkboxOnClick(this);" class="indeterminate"></label></td>
+      </tr>
+      <tr>
+        <td>Communicating Sequential Processes</td>
+        <td><label><input type="checkbox" onclick="checkboxOnClick(this);" class="indeterminate"></label></td>
+      </tr>
+      <tr>
+        <td>Homoiconic</td>
+        <td><label><input type="checkbox" onclick="checkboxOnClick(this);" class="checked"></label></td>
+      </tr>
+      <tr>
+        <td>Concurrency</td>
+        <td><label><input type="checkbox" onclick="checkboxOnClick(this);" class="checked"></label></td>
+      </tr>
+      <tr>
+        <td>Callbacks</td>
+        <td><label><input type="checkbox" onclick="checkboxOnClick(this);" class="indeterminate"></label></td>
+      </tr>
+      <tr>
+        <td>Type Inference</td>
+        <td><label><input type="checkbox" onclick="checkboxOnClick(this);" class="unchecked"></label></td>
+      </tr>
+      <tr>
+        <td>Dynamic Dispatch</td>
+        <td><label><input type="checkbox" onclick="checkboxOnClick(this);" class="checked"></label></td>
+      </tr>
+      <tr>
+        <td>Dynamic Typing</td>
+        <td><label><input type="checkbox" onclick="checkboxOnClick(this);" class="checked"></label></td>
+      </tr>
+      <tr>
+        <td>Heterogeneous Lists</td>
+        <td><label><input type="checkbox" onclick="checkboxOnClick(this);" class="checked"></label></td>
+      </tr>
+      </tbody>
+
+      <script>
+      let checks = document.getElementsByClassName("checked");
+      let lines = document.getElementsByClassName("indeterminate");
+
+      for (let i = 0; i < checks.length; i++) checks[i].checked = true;
+
+      for (let i = 0; i < lines.length; i++) lines[i].indeterminate = true;
+
+      function checkboxOnClick(self) {
+        switch (self.classList[0]) {
+          case "checked":
+            self.checked = true;
+            break;
+          case "indeterminate":
+            self.indeterminate = true;
+            break;
+          default:
+            self.checked = false;
+        }
+      }
+      </script>
+    </table>
+  </div>
+
+  <h2>
+    <a target="_blank" href="https://github.com/mckernant1/clojure-demo">Demo Project</a>
+  </h2>
+  <div class="subheader">References</div>
+  <ul>
+    <table>
+      <tr>
+        <td>
+          Clojure - Getting Started. (n.d.). Retrieved November 2, 2019, Last Accessed <a target="_blank" href="https://clojure.org/guides/getting_started">https://clojure.org/guides/getting_started</a>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          Learn X in Y minutes Where X=clojure. (n.d.). Last Accessed November 2, 2019, from <a target="_blank" href="https://learnxinyminutes.com/docs/clojure/">https://learnxinyminutes.com/docs/clojure/</a>
+        </td>
+      </tr>
+    </table>
+  </ul>
+</article>
+<footer>
+  <hr noshade size=“2” width=“75%”>
+
+  <font size=“1” face=“Verdana, Helvetica, sans-serif, Times”>
+    &copy; S. Perugini, Spring 2010, University of Dayton.
+    Permission to use ideas about
+    the organization of topics and any notes or material is granted,
+    provided suitable acknowledgments and citations are made.
+  </font>
+</footer>
+<script src="pl.js"></script>
+</body>
+</html>

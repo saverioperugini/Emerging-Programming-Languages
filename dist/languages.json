@@ -1,0 +1,282 @@
+[
+	{
+		"language":     "CLIPS",
+		"notes":        {
+			"modal": false,
+			"path":  "languages/CLIPS/index.html"
+		},
+		"reference":    {
+			"modal": false,
+			"path":  ""
+		},
+		"synopsis":     {
+			"modal": false,
+			"path":  "languages/CLIPS/synopsis/CLIPS.pdf"
+		},
+		"slides":       {
+			"modal": false,
+			"path":  ""
+		},
+		"presentation": false
+	},
+	{
+		"language":     "Clojure",
+		"notes":        {
+			"modal": false,
+			"path":  "languages/Clojure/index.html"
+		},
+		"reference":    {
+			"modal": false,
+			"path":  "languages/Clojure/reference/clojure.pdf"
+		},
+		"synopsis":     {
+			"modal": false,
+			"path":  ""
+		},
+		"slides":       {
+			"modal": false,
+			"path":  "languages/Clojure/presentation/clojure_slides.pdf"
+		},
+		"presentation": false
+	},
+	{
+		"language":     "Elixir",
+		"notes":        {
+			"modal": false,
+			"path":  "languages/Elixir/index.html"
+		},
+		"reference":    {
+			"modal": false,
+			"path":  ""
+		},
+		"synopsis":     {
+			"modal": false,
+			"path":  "languages/Elixir/synopsis/Elixir.pdf"
+		},
+		"slides":       {
+			"modal": false,
+			"path":  ""
+		},
+		"presentation": false
+	},
+	{
+		"language":     "FSharp",
+		"notes":        {
+			"modal": false,
+			"path":  "languages/FSharp/index.html"
+		},
+		"reference":    {
+			"modal": false,
+			"path":  "languages/FSharp/reference/berkshiret1-FSharp.pdf"
+		},
+		"synopsis":     {
+			"modal": false,
+			"path":  ""
+		},
+		"slides":       {
+			"modal": false,
+			"path":  ""
+		},
+		"presentation": false
+	},
+	{
+		"language":     "Factor",
+		"notes":        {
+			"modal": false,
+			"path":  "languages/Factor/index.html"
+		},
+		"reference":    {
+			"modal": false,
+			"path":  ""
+		},
+		"synopsis":     {
+			"modal": false,
+			"path":  "languages/Factor/synopsis/Factor.pdf"
+		},
+		"slides":       {
+			"modal": false,
+			"path":  ""
+		},
+		"presentation": false
+	},
+	{
+		"language":     "Idris",
+		"notes":        {
+			"modal": false,
+			"path":  "languages/Idris/notes.html"
+		},
+		"reference":    {
+			"modal": false,
+			"path":  "languages/Idris/reference/idris_quick_reference_sheet.pdf"
+		},
+		"synopsis":     {
+			"modal": false,
+			"path":  ""
+		},
+		"slides":       {
+			"modal": false,
+			"path":  ""
+		},
+		"presentation": false
+	},
+	{
+		"language":     "Io",
+		"notes":        {
+			"modal": false,
+			"path":  "languages/Io/index.html"
+		},
+		"reference":    {
+			"modal": false,
+			"path":  ""
+		},
+		"synopsis":     {
+			"modal": false,
+			"path":  ""
+		},
+		"slides":       {
+			"modal": false,
+			"path":  ""
+		},
+		"presentation": false
+	},
+	{
+		"language":     "Julia",
+		"notes":        {
+			"modal": false,
+			"path":  "languages/Julia/index.html"
+		},
+		"reference":    {
+			"modal": false,
+			"path":  ""
+		},
+		"synopsis":     {
+			"modal": false,
+			"path":  ""
+		},
+		"slides":       {
+			"modal": false,
+			"path":  ""
+		},
+		"presentation": false
+	},
+	{
+		"language":     "Kotlin",
+		"notes":        {
+			"modal": false,
+			"path":  "languages/Kotlin/index.html"
+		},
+		"reference":    {
+			"modal": false,
+			"path":  "languages/Kotlin/reference/KotlinReferenceSheet.pdf"
+		},
+		"synopsis":     {
+			"modal": false,
+			"path":  ""
+		},
+		"slides":       {
+			"modal": false,
+			"path":  ""
+		},
+		"presentation": false
+	},
+	{
+		"language":     "Lua",
+		"notes":        {
+			"modal": false,
+			"path":  "languages/Lua/index.html"
+		},
+		"reference":    {
+			"modal": false,
+			"path":  "languages/Lua/reference/Lua.pdf"
+		},
+		"synopsis":     {
+			"modal": false,
+			"path":  ""
+		},
+		"slides":       {
+			"modal": false,
+			"path":  ""
+		},
+		"presentation": false
+	},
+	{
+		"language":     "PROLOG",
+		"notes":        {
+			"modal": false,
+			"path":  "languages/PROLOG/index.html"
+		},
+		"reference":    {
+			"modal": false,
+			"path":  ""
+		},
+		"synopsis":     {
+			"modal": false,
+			"path":  "languages/PROLOG/synopsis/PROLOG.pdf"
+		},
+		"slides":       {
+			"modal": false,
+			"path":  ""
+		},
+		"presentation": false
+	},
+	{
+		"language":     "R",
+		"notes":        {
+			"modal": false,
+			"path":  "languages/R/index.html"
+		},
+		"reference":    {
+			"modal": false,
+			"path":  "languages/R/reference/QuickReference.pdf"
+		},
+		"synopsis":     {
+			"modal": false,
+			"path":  ""
+		},
+		"slides":       {
+			"modal": false,
+			"path":  "languages/R/presentation/R.pdf"
+		},
+		"presentation": false
+	},
+	{
+		"language":     "Swift",
+		"notes":        {
+			"modal": false,
+			"path":  "languages/Swift/index.html"
+		},
+		"reference":    {
+			"modal": false,
+			"path":  "languages/Swift/reference/patnaika2-Swift.pdf"
+		},
+		"synopsis":     {
+			"modal": false,
+			"path":  ""
+		},
+		"slides":       {
+			"modal": false,
+			"path":  ""
+		},
+		"presentation": false
+	},
+	{
+		"language":     "miniKanren",
+		"notes":        {
+			"modal": false,
+			"path":  "languages/miniKanren/index.html"
+		},
+		"reference":    {
+			"modal": false,
+			"path":  ""
+		},
+		"synopsis":     {
+			"modal": false,
+			"path":  "languages/miniKanren/synopsis/amatob1-miniKanren.pdf"
+		},
+		"slides":       {
+			"modal": false,
+			"path":  ""
+		},
+		"presentation": false
+	}
+]

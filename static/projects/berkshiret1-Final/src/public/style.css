@@ -1,0 +1,215 @@
+/*
+//******************************************************************************
+//
+//      filename:  style.css
+//
+//      description:  CSS styling
+//
+//       author:  Berkshire, Tyler P.
+//
+//       Copyright (c) 2019 Tyler P. Berkshire, University of Dayton
+//******************************************************************************
+*/
+
+/* Global */
+* {
+    padding: 0;
+    margin: 0;
+    font-family: sans-serif;
+}
+
+a {
+    color: inherit;
+    text-decoration: inherit;
+}
+
+html, body, #app {
+    height: 100%;
+    background-color: whitesmoke;
+}
+
+#app {
+    padding: 1rem;
+    background-color: whitesmoke;
+}
+
+h4 {
+    margin-bottom: 1.5rem;
+}
+
+br {
+    line-height: 200%;
+}
+
+input {
+    border-radius: 3px;
+    margin: 0 0.5rem;
+    border: 1px solid darkslategrey;
+    min-height: 24px;
+    padding: 4px;
+    box-sizing: border-box;
+}
+
+div {
+    text-align: center;
+}
+
+hr {
+    height: 1px;
+    border: 0;
+    border-top: 1px solid black;
+    padding: 0;
+}
+
+ul {
+    margin: auto;
+    list-style-type: none;
+    width: 70%;
+}
+
+button {
+    background-color: lightgreen;
+    border: 1px solid darkgreen;
+    padding: 4px 6px;
+    color: black;
+    border-radius: 3px;
+    cursor: pointer;
+    box-sizing: border-box;
+    min-height: 24px;
+}
+
+button:hover {
+    color: whitesmoke;
+}
+
+button:active {
+    color: black;
+}
+
+@keyframes spin-animation {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* Classes */
+
+.spin {
+    animation-name: spin-animation;
+    animation-duration: 800ms;
+    animation-iteration-count: infinite;
+    margin-right: 6px;
+    display: inline-block;
+}
+
+.footer {
+    border: 1px solid black;
+    line-height: 2rem;
+    position: fixed;
+    background: lightgreen;
+    bottom:0px;
+    width: 100%;
+    margin-left: 0;
+    margin-right: 0;
+    height: 2rem;
+    text-align: center;
+}
+
+.header {
+    border: 1px solid black;
+    position: fixed;
+    background: lightgreen;
+    width: 100%;
+    padding: 10px;
+    text-align: center;
+}
+
+.header img {
+    height: 50px;
+    width: 50px;
+    vertical-align: middle;
+}
+
+.tournaments div {
+    margin: 20px;
+    height: 100%;
+}
+
+.tournaments li img {
+    float: left;
+    margin: 0 15px 0 0;
+    height: 75px;
+    width: 75px;
+}
+
+.tournaments li {
+    padding: 10px 10px 20px;
+}
+
+.tournaments ul {
+    border: 1px solid black;
+}
+
+.tournaments li:hover {
+    background: lightgreen;
+    cursor: pointer;
+}
+
+.tournaments p {
+    font-size: 1.17em;
+}
+
+.tournaments span {
+    display: none;
+}
+
+.past {
+    margin-top: 20px;
+}
+
+.detail li {
+    padding: 10px 10px 20px;
+    margin-bottom: 20px;
+    border: 1px solid black;
+}
+
+.detail li img {
+    text-align: center;
+    height: 200px;
+    width: 200px;
+}
+
+.detail table {
+    width: 100%;
+}
+
+.detail td {
+    width: 50%;
+    text-align: center;
+    font-size: 1.17em;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+.detail tr:nth-child(odd) {
+    background-color: lightgreen;
+}
+
+.logo img {
+    height: 75px;
+    width: 75px;
+}
+
+.back {
+    margin-right: 20px;
+}
+
+.home img {
+    height: 100px;
+    width: 100px;
+    vertical-align: middle;
+}

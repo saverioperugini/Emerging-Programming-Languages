@@ -1,0 +1,7 @@
+x := "n"
+x = File standardInput readLine
+while(x == "y",
+   x = "n"
+   "Hello world" print
+   x = File standardInput readLine
+)

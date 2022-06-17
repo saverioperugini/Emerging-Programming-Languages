@@ -1,0 +1,18 @@
+<?xml version ="1.0" encoding ="utf-8"?>
+<actions>
+	<action intentName="actions.intent.INC_VOLUME">
+		<fulfillment urlTemplate="https://actions.lynkr.com/increase" />
+	</action>
+
+	<action intentName="actions.intent.DEC_VOLUME">
+		<fulfillment urlTemplate="https://actions.lynkr.com/decrease" />
+	</action>
+
+	<action intentName="actions.intent.KEYSTROKE">
+		<fulfillment urlTemplate="https://actions.lynkr.com/keystroke{?keystrokeIdentifier}">
+			<parameter-mapping
+				intentParameter="keystroke.id"
+				urlParameter="keystrokeIdentifier" />
+		</fulfillment>
+	</action>
+</actions>
